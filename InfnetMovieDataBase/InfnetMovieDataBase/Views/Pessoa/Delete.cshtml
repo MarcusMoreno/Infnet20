@@ -37,7 +37,7 @@
     </dl>
     
     <form asp-action="Delete">
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Voltar à lista</a>
+        <input type="submit" value="Delete" class="btn btn-danger" /> 
+        @Html.ActionLink("Back", "Index", "Pessoa", null, new { @class = "btn btn-secondary" })
     </form>
 </div>

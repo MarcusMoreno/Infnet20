@@ -1,11 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using InfnetMovieDataBase.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -27,6 +22,7 @@ namespace InfnetMovieDataBase
             #region repository
             services.AddSingleton<IPessoaRepository, PessoaRepository>();
             services.AddSingleton<IFilmeRepository, FilmeRepository>();
+            services.AddSingleton<IGeneroRepository, GeneroRepository>();
             #endregion
             services.AddControllersWithViews();
         }

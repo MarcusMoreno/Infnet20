@@ -158,19 +158,16 @@ namespace InfnetMovieDataBase.Repository
         {
             var filme = new Filme();
 
-            using var connection = new SqlConnection(connectionString); // Dá close e dispose
-                                                                        // Agora, a conexão existe.
-                                                                        // O que queremos acessar do banco?
+            using var connection = new SqlConnection(connectionString); 
             using var cmd = new SqlCommand("SELECT * FROM Filme WHERE id = @id", connection);
             cmd.Parameters.AddWithValue("@id", id);
 
             try
             {
-                //Abrir a conexão
                 connection.Open();
                 using var reader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
-                // A conexão está aberta; O comando SQL foi executado
                 reader.Read();
+
                 filme.Id = (int)reader["Id"];
                 filme.Titulo = reader["Titulo"].ToString();
                 filme.TituloOriginal = reader["TituloOriginal"].ToString();

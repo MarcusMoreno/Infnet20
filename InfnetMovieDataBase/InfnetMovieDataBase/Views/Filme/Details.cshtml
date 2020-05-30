@@ -37,7 +37,7 @@
     </dl>
 </div>
 <div>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Squad", "Elenco", new { id = Model.Id }) |
-    <a asp-action="Index">Back to List</a> 
+    @Html.ActionLink("Edit", "Edit", "Filme", new { id = Model.Id }, new { @class = "btn btn-warning" } ) 
+    @Html.ActionLink("Squad", "Elenco","Filme", new { id = Model.Id }, new { @class = "btn btn-info" }) 
+    @Html.ActionLink("Back", "Index", "Filme", null, new { @class = "btn btn-secondary" })
 </div>
