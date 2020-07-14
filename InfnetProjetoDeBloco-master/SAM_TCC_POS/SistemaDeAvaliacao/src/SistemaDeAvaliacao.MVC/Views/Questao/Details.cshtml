@@ -1,0 +1,39 @@
+﻿@model SistemaDeAvaliacao.Application.ViewModel.QuestaoViewModel
+
+@{
+    ViewBag.Title = "Details";
+    ViewBag.Icon = "fa fa-question-circle";
+    ViewBag.PageHeader = "Detalhe da Questão";
+    ViewBag.PageDescription = "Questão" + " " + Model.QuestaoId;
+
+    var breadCrumbArray = new string[] { "Questão", ViewBag.PageHeader };
+    ViewBag.Path = breadCrumbArray;
+}
+
+<div class="box box-primary">
+    <div class="box-header">
+    </div>
+    <div class="box-body no-padding">
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Descricao)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Descricao)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Categoria)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Categoria.Descricao)
+            </dd>
+        </dl>
+    </div>
+    <div class="box-footer">
+        @Html.ActionLink("Voltar", "Index", null, htmlAttributes: new { @class = "btn btn-default" })
+        <a href="@Url.Action("Edit", "Questao", new { id = Model.QuestaoId})" class="btn btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i>  Editar</a>
+    </div>
+</div>

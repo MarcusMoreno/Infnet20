@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ContosoDDD.Dominio\ContosoDDD.Dominio.csproj" />
+    <ProjectReference Include="..\ContosoDDD.Infraestrutura.Transversal.AutoMapper\ContosoDDD.Infraestrutura.Transversal.AutoMapper.csproj" />
+  </ItemGroup>
+
+</Project>

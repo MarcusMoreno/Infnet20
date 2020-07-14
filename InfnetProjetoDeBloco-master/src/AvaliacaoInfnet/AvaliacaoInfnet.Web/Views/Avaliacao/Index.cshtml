@@ -1,0 +1,38 @@
+﻿@model IEnumerable<AvaliacaoInfnet.Web.Models.AvaliacaoViewModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descricao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Perguntas)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataInicio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataFim)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ReferenceId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ReferenceId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ReferenceId })
+            </td>
+        </tr>
+    }
+</table>

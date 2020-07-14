@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{659259FE-26B5-4868-935C-B4A08BCDD924}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SistemaDeAvaliacao.Domain</RootNamespace>
+    <AssemblyName>SistemaDeAvaliacao.Domain</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Entities\Avaliacao.cs" />
+    <Compile Include="Entities\AvaliacaoResposta.cs" />
+    <Compile Include="Entities\OpcaoResposta.cs" />
+    <Compile Include="Entities\Questao.cs" />
+    <Compile Include="Entities\QuestaoCategoria.cs" />
+    <Compile Include="Entities\Usuario.cs" />
+    <Compile Include="Interface\Repository\IAvaliacaoRepository.cs" />
+    <Compile Include="Interface\Repository\IAvaliacaoRespostaRepository.cs" />
+    <Compile Include="Interface\Repository\IOpcaoRespostaRepository.cs" />
+    <Compile Include="Interface\Repository\IQuestaoCategoriaRepository.cs" />
+    <Compile Include="Interface\Repository\IQuestaoRepository.cs" />
+    <Compile Include="Interface\Repository\IRepositoryBase.cs" />
+    <Compile Include="Interface\Repository\IUsuarioRepository.cs" />
+    <Compile Include="Interface\Service\IAvaliacaoRespostaService.cs" />
+    <Compile Include="Interface\Service\IAvaliacaoService.cs" />
+    <Compile Include="Interface\Service\IOpcaoRespostaService.cs" />
+    <Compile Include="Interface\Service\IQuestaoCategoriaService.cs" />
+    <Compile Include="Interface\Service\IQuestaoService.cs" />
+    <Compile Include="Interface\Service\IServiceBase.cs" />
+    <Compile Include="Interface\Service\IUsuarioService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service\AvaliacaoRespostaService.cs" />
+    <Compile Include="Service\AvaliacaoService.cs" />
+    <Compile Include="Service\OpcaoRespostaService.cs" />
+    <Compile Include="Service\QuestaoCategoriaService.cs" />
+    <Compile Include="Service\QuestaoService.cs" />
+    <Compile Include="Service\ServiceBase.cs" />
+    <Compile Include="Service\UsuarioService.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

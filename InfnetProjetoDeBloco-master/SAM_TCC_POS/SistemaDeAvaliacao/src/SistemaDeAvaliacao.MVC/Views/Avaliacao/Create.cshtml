@@ -1,0 +1,115 @@
+﻿@model SistemaDeAvaliacao.Application.ViewModel.AvaliacaoViewModel
+
+@{
+    ViewBag.Title = "Criar Avaliação";
+    ViewBag.Icon = "fa fa-list-ul ";
+    ViewBag.PageHeader = "Avaliações";
+    ViewBag.PageDescription = "Manutenção do cadastro de Avaliações";
+    var breadCrumbArray = new string[] { ViewBag.PageHeader, ViewBag.Title };
+    ViewBag.Path = breadCrumbArray;
+}
+
+<div class="box box-primary">
+    <div class="box-header">
+        <h3 class="box-title">@ViewBag.Title</h3>
+    </div>
+    <div class="box-body">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <div class="form-horizontal">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Objetivo, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Objetivo, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Objetivo, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.DataInicio, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.DataInicio, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.DataInicio, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.DataTermino, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.DataTermino, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.DataTermino, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Curso, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Curso, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Curso, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.TurmaId, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.TurmaId, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.TurmaId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Professor, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Professor, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Professor, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="box box-primary">
+                    <div class="box-header">
+                        <h3 class="box-title">Questões</h3><br />
+                        <small>Selecione, pelo menos, uma questão de cada categoria.</small><br />
+                        <small>Segure CTRL + clique para selecionar as questões nas diferentes categorias.</small>
+                    </div>
+                    <div class="box-body">
+                        @for (int i = 0; i < Model.ListaCategorias.Count(); i++)
+                        {
+                            <div class="form-group">
+                                <h4>@Model.ListaCategorias[i].Descricao</h4>
+                                <div class="col-md-10">
+                                    @Html.ListBoxFor(model => model.IdQuestoesSelecionadas[i], new MultiSelectList(Model.ListaQuestoes.ToList().Where(q => q.CategoriaId == Model.ListaCategorias[i].CategoriaId), "QuestaoId", "Descricao", null), new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.IdQuestoesSelecionadas[i], null, new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    @*<div class="box-body">
+                            @Html.ValidationMessageFor(model => model.IdQuestoesSelecionadas, "", new { @class = "text-danger" })
+                            @foreach (var cat in Model.ListaCategorias)
+                            {
+                                <h4>@cat.Descricao</h4>
+
+                                @Html.ListBoxFor(model => model.IdQuestoesSelecionadas, new MultiSelectList(Model.ListaQuestoes.ToList().Where(q => q.CategoriaId == cat.CategoriaId), "QuestaoId", "Descricao", null), new { @class = "form-control" })
+
+                            }
+                        </div>*@
+                </div>
+
+                <div class="box-footer">
+                    <div class="form-group text-right">
+                        @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-default" })
+                        <input type="submit" value="Salvar" class="btn btn-success" />
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

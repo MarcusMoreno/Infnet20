@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="RecuperaDados" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://localhost:50628/RecuperaDados.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:50628/RecuperaDados.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:50628/RecuperaDados.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/ServiceRecuperaDados" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IRecuperaDados_adicionaCurso_InputMessage">
+    <wsdl:part name="parameters" element="tns:adicionaCurso" />
+  </wsdl:message>
+  <wsdl:message name="IRecuperaDados_adicionaCurso_OutputMessage">
+    <wsdl:part name="parameters" element="tns:adicionaCursoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRecuperaDados_adicionaTurma_InputMessage">
+    <wsdl:part name="parameters" element="tns:adicionaTurma" />
+  </wsdl:message>
+  <wsdl:message name="IRecuperaDados_adicionaTurma_OutputMessage">
+    <wsdl:part name="parameters" element="tns:adicionaTurmaResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRecuperaDados_adicionaAluno_InputMessage">
+    <wsdl:part name="parameters" element="tns:adicionaAluno" />
+  </wsdl:message>
+  <wsdl:message name="IRecuperaDados_adicionaAluno_OutputMessage">
+    <wsdl:part name="parameters" element="tns:adicionaAlunoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRecuperaDados_adicionaProfessor_InputMessage">
+    <wsdl:part name="parameters" element="tns:adicionaProfessor" />
+  </wsdl:message>
+  <wsdl:message name="IRecuperaDados_adicionaProfessor_OutputMessage">
+    <wsdl:part name="parameters" element="tns:adicionaProfessorResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRecuperaDados_apagarAlunos_InputMessage">
+    <wsdl:part name="parameters" element="tns:apagarAlunos" />
+  </wsdl:message>
+  <wsdl:message name="IRecuperaDados_apagarAlunos_OutputMessage">
+    <wsdl:part name="parameters" element="tns:apagarAlunosResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRecuperaDados_apagarProfessores_InputMessage">
+    <wsdl:part name="parameters" element="tns:apagarProfessores" />
+  </wsdl:message>
+  <wsdl:message name="IRecuperaDados_apagarProfessores_OutputMessage">
+    <wsdl:part name="parameters" element="tns:apagarProfessoresResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRecuperaDados_apagarTurmas_InputMessage">
+    <wsdl:part name="parameters" element="tns:apagarTurmas" />
+  </wsdl:message>
+  <wsdl:message name="IRecuperaDados_apagarTurmas_OutputMessage">
+    <wsdl:part name="parameters" element="tns:apagarTurmasResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRecuperaDados_apagarCursos_InputMessage">
+    <wsdl:part name="parameters" element="tns:apagarCursos" />
+  </wsdl:message>
+  <wsdl:message name="IRecuperaDados_apagarCursos_OutputMessage">
+    <wsdl:part name="parameters" element="tns:apagarCursosResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRecuperaDados_RecuperaAlunos_InputMessage">
+    <wsdl:part name="parameters" element="tns:RecuperaAlunos" />
+  </wsdl:message>
+  <wsdl:message name="IRecuperaDados_RecuperaAlunos_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RecuperaAlunosResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRecuperaDados_RecuperaProfessores_InputMessage">
+    <wsdl:part name="parameters" element="tns:RecuperaProfessores" />
+  </wsdl:message>
+  <wsdl:message name="IRecuperaDados_RecuperaProfessores_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RecuperaProfessoresResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRecuperaDados_RecuperaCursos_InputMessage">
+    <wsdl:part name="parameters" element="tns:RecuperaCursos" />
+  </wsdl:message>
+  <wsdl:message name="IRecuperaDados_RecuperaCursos_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RecuperaCursosResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRecuperaDados_RecuperaTurmas_InputMessage">
+    <wsdl:part name="parameters" element="tns:RecuperaTurmas" />
+  </wsdl:message>
+  <wsdl:message name="IRecuperaDados_RecuperaTurmas_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RecuperaTurmasResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRecuperaDados_ListaDeAlunosDaTurma_InputMessage">
+    <wsdl:part name="parameters" element="tns:ListaDeAlunosDaTurma" />
+  </wsdl:message>
+  <wsdl:message name="IRecuperaDados_ListaDeAlunosDaTurma_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ListaDeAlunosDaTurmaResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRecuperaDados_ListaDeTurmasDoCurso_InputMessage">
+    <wsdl:part name="parameters" element="tns:ListaDeTurmasDoCurso" />
+  </wsdl:message>
+  <wsdl:message name="IRecuperaDados_ListaDeTurmasDoCurso_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ListaDeTurmasDoCursoResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IRecuperaDados">
+    <wsdl:operation name="adicionaCurso">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRecuperaDados/adicionaCurso" message="tns:IRecuperaDados_adicionaCurso_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRecuperaDados/adicionaCursoResponse" message="tns:IRecuperaDados_adicionaCurso_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="adicionaTurma">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRecuperaDados/adicionaTurma" message="tns:IRecuperaDados_adicionaTurma_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRecuperaDados/adicionaTurmaResponse" message="tns:IRecuperaDados_adicionaTurma_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="adicionaAluno">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRecuperaDados/adicionaAluno" message="tns:IRecuperaDados_adicionaAluno_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRecuperaDados/adicionaAlunoResponse" message="tns:IRecuperaDados_adicionaAluno_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="adicionaProfessor">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRecuperaDados/adicionaProfessor" message="tns:IRecuperaDados_adicionaProfessor_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRecuperaDados/adicionaProfessorResponse" message="tns:IRecuperaDados_adicionaProfessor_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="apagarAlunos">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRecuperaDados/apagarAlunos" message="tns:IRecuperaDados_apagarAlunos_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRecuperaDados/apagarAlunosResponse" message="tns:IRecuperaDados_apagarAlunos_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="apagarProfessores">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRecuperaDados/apagarProfessores" message="tns:IRecuperaDados_apagarProfessores_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRecuperaDados/apagarProfessoresResponse" message="tns:IRecuperaDados_apagarProfessores_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="apagarTurmas">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRecuperaDados/apagarTurmas" message="tns:IRecuperaDados_apagarTurmas_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRecuperaDados/apagarTurmasResponse" message="tns:IRecuperaDados_apagarTurmas_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="apagarCursos">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRecuperaDados/apagarCursos" message="tns:IRecuperaDados_apagarCursos_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRecuperaDados/apagarCursosResponse" message="tns:IRecuperaDados_apagarCursos_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RecuperaAlunos">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRecuperaDados/RecuperaAlunos" message="tns:IRecuperaDados_RecuperaAlunos_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRecuperaDados/RecuperaAlunosResponse" message="tns:IRecuperaDados_RecuperaAlunos_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RecuperaProfessores">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRecuperaDados/RecuperaProfessores" message="tns:IRecuperaDados_RecuperaProfessores_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRecuperaDados/RecuperaProfessoresResponse" message="tns:IRecuperaDados_RecuperaProfessores_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RecuperaCursos">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRecuperaDados/RecuperaCursos" message="tns:IRecuperaDados_RecuperaCursos_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRecuperaDados/RecuperaCursosResponse" message="tns:IRecuperaDados_RecuperaCursos_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RecuperaTurmas">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRecuperaDados/RecuperaTurmas" message="tns:IRecuperaDados_RecuperaTurmas_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRecuperaDados/RecuperaTurmasResponse" message="tns:IRecuperaDados_RecuperaTurmas_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ListaDeAlunosDaTurma">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRecuperaDados/ListaDeAlunosDaTurma" message="tns:IRecuperaDados_ListaDeAlunosDaTurma_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRecuperaDados/ListaDeAlunosDaTurmaResponse" message="tns:IRecuperaDados_ListaDeAlunosDaTurma_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ListaDeTurmasDoCurso">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRecuperaDados/ListaDeTurmasDoCurso" message="tns:IRecuperaDados_ListaDeTurmasDoCurso_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRecuperaDados/ListaDeTurmasDoCursoResponse" message="tns:IRecuperaDados_ListaDeTurmasDoCurso_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IRecuperaDados" type="tns:IRecuperaDados">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="adicionaCurso">
+      <soap:operation soapAction="http://tempuri.org/IRecuperaDados/adicionaCurso" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="adicionaTurma">
+      <soap:operation soapAction="http://tempuri.org/IRecuperaDados/adicionaTurma" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="adicionaAluno">
+      <soap:operation soapAction="http://tempuri.org/IRecuperaDados/adicionaAluno" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="adicionaProfessor">
+      <soap:operation soapAction="http://tempuri.org/IRecuperaDados/adicionaProfessor" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="apagarAlunos">
+      <soap:operation soapAction="http://tempuri.org/IRecuperaDados/apagarAlunos" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="apagarProfessores">
+      <soap:operation soapAction="http://tempuri.org/IRecuperaDados/apagarProfessores" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="apagarTurmas">
+      <soap:operation soapAction="http://tempuri.org/IRecuperaDados/apagarTurmas" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="apagarCursos">
+      <soap:operation soapAction="http://tempuri.org/IRecuperaDados/apagarCursos" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RecuperaAlunos">
+      <soap:operation soapAction="http://tempuri.org/IRecuperaDados/RecuperaAlunos" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RecuperaProfessores">
+      <soap:operation soapAction="http://tempuri.org/IRecuperaDados/RecuperaProfessores" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RecuperaCursos">
+      <soap:operation soapAction="http://tempuri.org/IRecuperaDados/RecuperaCursos" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RecuperaTurmas">
+      <soap:operation soapAction="http://tempuri.org/IRecuperaDados/RecuperaTurmas" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListaDeAlunosDaTurma">
+      <soap:operation soapAction="http://tempuri.org/IRecuperaDados/ListaDeAlunosDaTurma" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListaDeTurmasDoCurso">
+      <soap:operation soapAction="http://tempuri.org/IRecuperaDados/ListaDeTurmasDoCurso" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="RecuperaDados">
+    <wsdl:port name="BasicHttpBinding_IRecuperaDados" binding="tns:BasicHttpBinding_IRecuperaDados">
+      <soap:address location="http://localhost:50628/RecuperaDados.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,139 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.16
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0 - Presentation", "0 - Presentation", "{4FA8228A-D5BD-4AA0-A613-B57F506684A7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3 - Domain", "3 - Domain", "{499A6D70-99FE-418E-BCBB-D9B260C3E642}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4 - Infra", "4 - Infra", "{4F8867E2-4521-4E1C-B57F-333FFBB09402}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4.1 - Data", "4.1 - Data", "{A7D2FB6D-E397-4846-8E93-715AA638AE6F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4.2 - CrossCutting", "4.2 - CrossCutting", "{7D1C6E18-9267-4800-9708-1B7627A72AA2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SistemaDeAvaliacao.Infra.CrossCutting.Identity", "src\SistemaDeAvaliacao.Infra.CrossCutting.Identity\SistemaDeAvaliacao.Infra.CrossCutting.Identity.csproj", "{9062B1C5-F32D-435E-93B2-2E7F6268B2A1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SistemaDeAvaliacao.CrossCutting.IoC", "src\SistemaDeAvaliacao.Infra.CrossCutting.IoC\SistemaDeAvaliacao.CrossCutting.IoC.csproj", "{DAC5216E-41D8-44AD-90A3-DC88F7A4A2CE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SistemaDeAvaliacao.MVC", "src\SistemaDeAvaliacao.MVC\SistemaDeAvaliacao.MVC.csproj", "{73AAEC7C-9DF5-457A-8096-E2B915B4FAF2}"
+	ProjectSection(ProjectDependencies) = postProject
+		{5ED59EAF-8146-42E0-B8B0-967E8C6B3939} = {5ED59EAF-8146-42E0-B8B0-967E8C6B3939}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SistemaDeAvaliacao.Domain", "src\SistemaDeAvaliacao.Domain\SistemaDeAvaliacao.Domain.csproj", "{659259FE-26B5-4868-935C-B4A08BCDD924}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SistemaDeAvaliacao.Infra.Data", "src\SistemaDeAvaliacao.Infra.Data\SistemaDeAvaliacao.Infra.Data.csproj", "{7452498E-395C-4BEC-87AF-1B2B3AA8BD10}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1 - Service", "1 - Service", "{4A3831D8-1902-43FE-8F42-CF67E3715E47}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2 - Application", "2 - Application", "{3E56A0FA-004F-4FAC-8341-CF599C829C99}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SistemaDeAvaliacao.Application", "src\SistemaDeAvaliacao.Application\SistemaDeAvaliacao.Application.csproj", "{9A26E45A-5352-4C22-A36F-571CEB904F94}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceRecuperaDados", "ServiceRecuperaDados\ServiceRecuperaDados.csproj", "{5ED59EAF-8146-42E0-B8B0-967E8C6B3939}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5 - Test", "5 - Test", "{F4C2F924-D284-41A1-903E-624B4099D307}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestApp", "TestApp\TestApp.csproj", "{1E6B2A8F-A1BC-483E-B853-2C3FCDEB162D}"
+	ProjectSection(ProjectDependencies) = postProject
+		{5ED59EAF-8146-42E0-B8B0-967E8C6B3939} = {5ED59EAF-8146-42E0-B8B0-967E8C6B3939}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9062B1C5-F32D-435E-93B2-2E7F6268B2A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9062B1C5-F32D-435E-93B2-2E7F6268B2A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9062B1C5-F32D-435E-93B2-2E7F6268B2A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9062B1C5-F32D-435E-93B2-2E7F6268B2A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DAC5216E-41D8-44AD-90A3-DC88F7A4A2CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DAC5216E-41D8-44AD-90A3-DC88F7A4A2CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DAC5216E-41D8-44AD-90A3-DC88F7A4A2CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DAC5216E-41D8-44AD-90A3-DC88F7A4A2CE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{73AAEC7C-9DF5-457A-8096-E2B915B4FAF2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73AAEC7C-9DF5-457A-8096-E2B915B4FAF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73AAEC7C-9DF5-457A-8096-E2B915B4FAF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73AAEC7C-9DF5-457A-8096-E2B915B4FAF2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{659259FE-26B5-4868-935C-B4A08BCDD924}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{659259FE-26B5-4868-935C-B4A08BCDD924}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{659259FE-26B5-4868-935C-B4A08BCDD924}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{659259FE-26B5-4868-935C-B4A08BCDD924}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7452498E-395C-4BEC-87AF-1B2B3AA8BD10}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7452498E-395C-4BEC-87AF-1B2B3AA8BD10}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7452498E-395C-4BEC-87AF-1B2B3AA8BD10}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7452498E-395C-4BEC-87AF-1B2B3AA8BD10}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A26E45A-5352-4C22-A36F-571CEB904F94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A26E45A-5352-4C22-A36F-571CEB904F94}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A26E45A-5352-4C22-A36F-571CEB904F94}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A26E45A-5352-4C22-A36F-571CEB904F94}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5ED59EAF-8146-42E0-B8B0-967E8C6B3939}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5ED59EAF-8146-42E0-B8B0-967E8C6B3939}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5ED59EAF-8146-42E0-B8B0-967E8C6B3939}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5ED59EAF-8146-42E0-B8B0-967E8C6B3939}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1E6B2A8F-A1BC-483E-B853-2C3FCDEB162D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E6B2A8F-A1BC-483E-B853-2C3FCDEB162D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E6B2A8F-A1BC-483E-B853-2C3FCDEB162D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E6B2A8F-A1BC-483E-B853-2C3FCDEB162D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A7D2FB6D-E397-4846-8E93-715AA638AE6F} = {4F8867E2-4521-4E1C-B57F-333FFBB09402}
+		{7D1C6E18-9267-4800-9708-1B7627A72AA2} = {4F8867E2-4521-4E1C-B57F-333FFBB09402}
+		{9062B1C5-F32D-435E-93B2-2E7F6268B2A1} = {7D1C6E18-9267-4800-9708-1B7627A72AA2}
+		{DAC5216E-41D8-44AD-90A3-DC88F7A4A2CE} = {7D1C6E18-9267-4800-9708-1B7627A72AA2}
+		{73AAEC7C-9DF5-457A-8096-E2B915B4FAF2} = {4FA8228A-D5BD-4AA0-A613-B57F506684A7}
+		{659259FE-26B5-4868-935C-B4A08BCDD924} = {499A6D70-99FE-418E-BCBB-D9B260C3E642}
+		{7452498E-395C-4BEC-87AF-1B2B3AA8BD10} = {A7D2FB6D-E397-4846-8E93-715AA638AE6F}
+		{9A26E45A-5352-4C22-A36F-571CEB904F94} = {3E56A0FA-004F-4FAC-8341-CF599C829C99}
+		{5ED59EAF-8146-42E0-B8B0-967E8C6B3939} = {4A3831D8-1902-43FE-8F42-CF67E3715E47}
+		{1E6B2A8F-A1BC-483E-B853-2C3FCDEB162D} = {F4C2F924-D284-41A1-903E-624B4099D307}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AE6EF9CF-F265-446B-B2AB-D831786B026C}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 9
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://rclemente.visualstudio.com/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = src\\SistemaDeAvaliacao.Application\\SistemaDeAvaliacao.Application.csproj
+		SccProjectTopLevelParentUniqueName1 = SistemaDeAvaliacao.sln
+		SccProjectName1 = src/SistemaDeAvaliacao.Application
+		SccLocalPath1 = src\\SistemaDeAvaliacao.Application
+		SccProjectUniqueName2 = src\\SistemaDeAvaliacao.Domain\\SistemaDeAvaliacao.Domain.csproj
+		SccProjectTopLevelParentUniqueName2 = SistemaDeAvaliacao.sln
+		SccProjectName2 = src/SistemaDeAvaliacao.Domain
+		SccLocalPath2 = src\\SistemaDeAvaliacao.Domain
+		SccProjectUniqueName3 = src\\SistemaDeAvaliacao.Infra.CrossCutting.Identity\\SistemaDeAvaliacao.Infra.CrossCutting.Identity.csproj
+		SccProjectTopLevelParentUniqueName3 = SistemaDeAvaliacao.sln
+		SccProjectName3 = src/SistemaDeAvaliacao.Infra.CrossCutting.Identity
+		SccLocalPath3 = src\\SistemaDeAvaliacao.Infra.CrossCutting.Identity
+		SccProjectUniqueName4 = src\\SistemaDeAvaliacao.Infra.CrossCutting.IoC\\SistemaDeAvaliacao.CrossCutting.IoC.csproj
+		SccProjectTopLevelParentUniqueName4 = SistemaDeAvaliacao.sln
+		SccProjectName4 = src/SistemaDeAvaliacao.Infra.CrossCutting.IoC
+		SccLocalPath4 = src\\SistemaDeAvaliacao.Infra.CrossCutting.IoC
+		SccProjectUniqueName5 = src\\SistemaDeAvaliacao.Infra.Data\\SistemaDeAvaliacao.Infra.Data.csproj
+		SccProjectTopLevelParentUniqueName5 = SistemaDeAvaliacao.sln
+		SccProjectName5 = src/SistemaDeAvaliacao.Infra.Data
+		SccLocalPath5 = src\\SistemaDeAvaliacao.Infra.Data
+		SccProjectUniqueName6 = src\\SistemaDeAvaliacao.MVC\\SistemaDeAvaliacao.MVC.csproj
+		SccProjectTopLevelParentUniqueName6 = SistemaDeAvaliacao.sln
+		SccProjectName6 = src/SistemaDeAvaliacao.MVC
+		SccLocalPath6 = src\\SistemaDeAvaliacao.MVC
+		SccProjectUniqueName7 = ServiceRecuperaDados\\ServiceRecuperaDados.csproj
+		SccProjectTopLevelParentUniqueName7 = SistemaDeAvaliacao.sln
+		SccProjectName7 = ServiceRecuperaDados
+		SccLocalPath7 = ServiceRecuperaDados
+		SccProjectUniqueName8 = TestApp\\TestApp.csproj
+		SccProjectTopLevelParentUniqueName8 = SistemaDeAvaliacao.sln
+		SccProjectName8 = TestApp
+		SccLocalPath8 = TestApp
+	EndGlobalSection
+EndGlobal

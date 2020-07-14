@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="b73a9589-ab57-4a34-8978-9eeb2df416b2" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings>
+      <CollectionMapping TypeName="System.Collections.Generic.List`1" Category="List" />
+    </CollectionMappings>
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:18255/Connected Services/SVCRecuperaDados/RecuperaDados.disco" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="RecuperaDados.wsdl" MetadataType="Wsdl" ID="9c73a713-e5b0-4d42-9ce6-d8c95b727e9b" SourceId="1" SourceUrl="http://localhost:50628/RecuperaDados.svc?wsdl" />
+    <MetadataFile FileName="RecuperaDados.xsd" MetadataType="Schema" ID="b9f465cd-6827-4855-9032-41e421e83d8b" SourceId="1" SourceUrl="http://localhost:50628/RecuperaDados.svc?xsd=xsd0" />
+    <MetadataFile FileName="RecuperaDados.disco" MetadataType="Disco" ID="404b91be-da13-476c-9798-16c052e203a5" SourceId="1" SourceUrl="http://localhost:18255/Connected Services/SVCRecuperaDados/RecuperaDados.disco" />
+    <MetadataFile FileName="RecuperaDados1.xsd" MetadataType="Schema" ID="a8ec89a5-73a8-4c72-ab99-bf116e0db8e6" SourceId="1" SourceUrl="http://localhost:50628/RecuperaDados.svc?xsd=xsd2" />
+    <MetadataFile FileName="RecuperaDados2.xsd" MetadataType="Schema" ID="bd661c96-f432-47fa-b587-c5ac288f1d36" SourceId="1" SourceUrl="http://localhost:50628/RecuperaDados.svc?xsd=xsd1" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

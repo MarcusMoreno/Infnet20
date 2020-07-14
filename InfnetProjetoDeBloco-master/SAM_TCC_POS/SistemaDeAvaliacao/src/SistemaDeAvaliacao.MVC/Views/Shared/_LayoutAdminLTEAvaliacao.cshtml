@@ -1,0 +1,135 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>S.A.M. - Sistema de Avaliação de Módulos</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+
+    @Styles.Render("~/Content/AdmLte")
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <!-- Google Font -->
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var current = 1;
+
+            widget = $(".step");
+            btnnext = $(".next");
+            btnback = $(".back");
+            btnsubmit = $(".submit");
+
+            // Init buttons and UI
+            widget.not(':eq(0)').hide();
+            hideButtons(current);
+            setProgress(current);
+
+            // Next button click action
+            btnnext.click(function () {
+                if (current < widget.length) {
+                    widget.show();
+                    widget.not(':eq(' + (current++) + ')').hide();
+                    setProgress(current);
+                }
+                hideButtons(current);
+            })
+
+            // Back button click action
+            btnback.click(function () {
+                if (current > 1) {
+                    current = current - 2;
+                    btnnext.trigger('click');
+                }
+                hideButtons(current);
+            })
+        });
+
+        // Change progress bar action
+        setProgress = function (currstep) {
+            var percent = parseFloat(100 / widget.length) * currstep;
+            percent = percent.toFixed();
+            $(".progress-bar").css("width", percent + "%").html(percent + "%");
+        }
+
+        // Hide buttons according to the current step
+        hideButtons = function (current) {
+            var limit = parseInt(widget.length);
+
+            $(".action").hide();
+
+            if (current < limit) btnnext.show();
+            if (current > 1) btnback.show();
+            if (current == limit) { btnnext.hide(); btnsubmit.show(); }
+        }
+            ;
+    </script>
+</head>
+<!-- ADD THE CLASS layout-top-nav TO REMOVE THE SIDEBAR. -->
+<body class="hold-transition skin-blue layout-top-nav">
+    <div class="wrapper">
+        <header class="main-header">
+            <nav class="navbar navbar-static-top">
+                <div class="container">
+                    <div class="navbar-header">
+                        <a href="#" class="navbar-brand"><span class="logo-lg"><i class="fa fa-graduation-cap" aria-hidden="true"></i> Sistema de Avaliação de Módulos</span></a>
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <!-- Full Width Column -->
+        <div class="content-wrapper">
+            <div class="container">
+                <!-- Content Header (Page header) -->
+                @*<section class="content-header">
+                    <h1>
+                        Top Navigation
+                        <small>Example 2.0</small>
+                    </h1>
+                    <ol class="breadcrumb">
+                        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                        <li><a href="#">Layout</a></li>
+                        <li class="active">Top Navigation</li>
+                    </ol>
+                </section>*@
+                <!-- Main content -->
+                <section class="content">
+
+                    @RenderBody()
+
+                </section>
+                <!-- /.content -->
+            </div>
+            <!-- /.container -->
+        </div>
+        <!-- /.content-wrapper -->
+        <footer class="main-footer">
+            <div class="container">
+                <div class="pull-right hidden-xs">
+                    <b>Version</b> 0.1
+                </div>
+                <strong>Copyright &copy; 2017 <a href="#">S.A.M. - Sistema de Avaliação de Módulos</a>.</strong> All rights reserved.
+                reserved.
+            </div>
+            <!-- /.container -->
+        </footer>
+    </div>
+    <!-- ./wrapper -->
+    <!-- REQUIRED JS SCRIPTS -->
+    @Scripts.Render("~/bundles/AdmLte")
+    @RenderSection("scripts", required: false)
+    <!-- Optionally, you can add Slimscroll and FastClick plugins.
+         Both of these plugins are recommended to enhance the
+         user experience. -->
+</body>
+</html>

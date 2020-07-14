@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/ServiceRecuperaDados" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/ServiceRecuperaDados" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:50628/RecuperaDados.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:complexType name="Curso">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="idCurso" type="ser:guid" />
+      <xs:element minOccurs="0" name="nomeCurso" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="turmas" nillable="true" type="tns:ArrayOfTurma" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Curso" nillable="true" type="tns:Curso" />
+  <xs:complexType name="ArrayOfTurma">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Turma" nillable="true" type="tns:Turma" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfTurma" nillable="true" type="tns:ArrayOfTurma" />
+  <xs:complexType name="Turma">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="alunos" nillable="true" type="tns:ArrayOfAluno" />
+      <xs:element minOccurs="0" name="curso" nillable="true" type="tns:Curso" />
+      <xs:element minOccurs="0" name="idCurso" type="xs:int" />
+      <xs:element minOccurs="0" name="idProfessor" type="xs:int" />
+      <xs:element minOccurs="0" name="idTurma" type="ser:guid" />
+      <xs:element minOccurs="0" name="nomeTurma" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="professor" nillable="true" type="tns:Professor" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Turma" nillable="true" type="tns:Turma" />
+  <xs:complexType name="ArrayOfAluno">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Aluno" nillable="true" type="tns:Aluno" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfAluno" nillable="true" type="tns:ArrayOfAluno" />
+  <xs:complexType name="Aluno">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="emailAluno" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="idAluno" type="ser:guid" />
+      <xs:element minOccurs="0" name="idTurma" type="xs:int" />
+      <xs:element minOccurs="0" name="nomeAluno" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="turma" nillable="true" type="tns:Turma" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Aluno" nillable="true" type="tns:Aluno" />
+  <xs:complexType name="Professor">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="email" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="idProfessor" type="ser:guid" />
+      <xs:element minOccurs="0" name="nomeProfessor" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Professor" nillable="true" type="tns:Professor" />
+  <xs:complexType name="ArrayOfProfessor">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Professor" nillable="true" type="tns:Professor" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfProfessor" nillable="true" type="tns:ArrayOfProfessor" />
+  <xs:complexType name="ArrayOfCurso">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Curso" nillable="true" type="tns:Curso" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfCurso" nillable="true" type="tns:ArrayOfCurso" />
+</xs:schema>

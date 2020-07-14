@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:50628/RecuperaDados.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/ServiceRecuperaDados" />
+  <xs:element name="adicionaCurso">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/ServiceRecuperaDados" minOccurs="0" name="curso" nillable="true" type="q1:Curso" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="adicionaCursoResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="adicionaTurma">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/ServiceRecuperaDados" minOccurs="0" name="turma" nillable="true" type="q2:Turma" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="adicionaTurmaResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="adicionaAluno">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/ServiceRecuperaDados" minOccurs="0" name="aluno" nillable="true" type="q3:Aluno" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="adicionaAlunoResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="adicionaProfessor">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/ServiceRecuperaDados" minOccurs="0" name="professor" nillable="true" type="q4:Professor" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="adicionaProfessorResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="apagarAlunos">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="apagarAlunosResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="apagarProfessores">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="apagarProfessoresResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="apagarTurmas">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="apagarTurmasResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="apagarCursos">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="apagarCursosResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RecuperaAlunos">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RecuperaAlunosResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/ServiceRecuperaDados" minOccurs="0" name="RecuperaAlunosResult" nillable="true" type="q5:ArrayOfAluno" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RecuperaProfessores">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RecuperaProfessoresResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/ServiceRecuperaDados" minOccurs="0" name="RecuperaProfessoresResult" nillable="true" type="q6:ArrayOfProfessor" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RecuperaCursos">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RecuperaCursosResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/ServiceRecuperaDados" minOccurs="0" name="RecuperaCursosResult" nillable="true" type="q7:ArrayOfCurso" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RecuperaTurmas">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RecuperaTurmasResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/ServiceRecuperaDados" minOccurs="0" name="RecuperaTurmasResult" nillable="true" type="q8:ArrayOfTurma" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RecuperaModulos">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RecuperaModulosResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/ServiceRecuperaDados" minOccurs="0" name="RecuperaModulosResult" nillable="true" type="q9:ArrayOfModulo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ListaDeAlunosDaTurma">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/ServiceRecuperaDados" minOccurs="0" name="turma" nillable="true" type="q10:Turma" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ListaDeAlunosDaTurmaResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/ServiceRecuperaDados" minOccurs="0" name="ListaDeAlunosDaTurmaResult" nillable="true" type="q11:ArrayOfAluno" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ListaDeAlunosDaTurmaPorNome">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="turma" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ListaDeAlunosDaTurmaPorNomeResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/ServiceRecuperaDados" minOccurs="0" name="ListaDeAlunosDaTurmaPorNomeResult" nillable="true" type="q12:ArrayOfAluno" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ListaDeTurmasDoCurso">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/ServiceRecuperaDados" minOccurs="0" name="curso" nillable="true" type="q13:Curso" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ListaDeTurmasDoCursoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/ServiceRecuperaDados" minOccurs="0" name="ListaDeTurmasDoCursoResult" nillable="true" type="q14:ArrayOfTurma" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="turmaPorID">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="id" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="turmaPorIDResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/ServiceRecuperaDados" minOccurs="0" name="turmaPorIDResult" nillable="true" type="q15:Turma" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="turmaPorNome">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="nome" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="turmaPorNomeResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/ServiceRecuperaDados" minOccurs="0" name="turmaPorNomeResult" nillable="true" type="q16:Turma" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="alunoPorId">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="id" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="alunoPorIdResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/ServiceRecuperaDados" minOccurs="0" name="alunoPorIdResult" nillable="true" type="q17:Aluno" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="alunoPorNome">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="nome" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="alunoPorNomeResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/ServiceRecuperaDados" minOccurs="0" name="alunoPorNomeResult" nillable="true" type="q18:Aluno" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

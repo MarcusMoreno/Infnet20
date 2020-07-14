@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoFac" Version="5.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ContosoDDD.Aplicacao\ContosoDDD.Aplicacao.csproj" />
+    <ProjectReference Include="..\ContosoDDD.Dominio.Servicos\ContosoDDD.Dominio.Servicos.csproj" />
+    <ProjectReference Include="..\ContosoDDD.Infraestrutura.Persistencia\ContosoDDD.Infraestrutura.Persistencia.csproj" />
+    <ProjectReference Include="..\ContosoDDD.Infraestrutura.Transversal.AutoMapper\ContosoDDD.Infraestrutura.Transversal.AutoMapper.csproj" />
+  </ItemGroup>
+
+</Project>
