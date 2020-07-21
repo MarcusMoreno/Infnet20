@@ -1,6 +1,6 @@
 ﻿USE InfnetMovieDataBase;
 
-CREATE TABLE [dbo].[Pessoa] (
+CREATE TABLE [dbo].[Ator] (
     [Id]             INT           NOT NULL PRIMARY KEY IDENTITY,
     [Nome]           VARCHAR (255) NULL,
     [Sobrenome]      VARCHAR (255) NULL,

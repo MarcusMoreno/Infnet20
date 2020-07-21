@@ -45,8 +45,7 @@ namespace InfnetMovieDataBase.Repository
                     var filme = new Filme
                     {
                         Titulo = reader["Titulo"].ToString(),
-                        TituloOriginal = reader["TituloOriginal"].ToString(),
-                        Ano = Convert.ToInt32( reader["Ano"])                       
+                        TituloOriginal = reader["TituloOriginal"].ToString()                    
                     };
 
                     filmes.Add(filme);

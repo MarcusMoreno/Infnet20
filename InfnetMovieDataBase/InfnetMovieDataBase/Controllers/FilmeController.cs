@@ -7,10 +7,14 @@ namespace InfnetMovieDataBase.Controllers
     public class FilmeController : Controller
     {
         private readonly IFilmeRepository filmeRepository;
-   
-        public FilmeController(IFilmeRepository filmeRepository)
+        private readonly IAtorRepository atorRepository;
+        private readonly IFilmeAtorRepository filmeAtorRepository;
+
+        public FilmeController(IFilmeRepository filmeRepository, IAtorRepository atorRepository, IFilmeAtorRepository filmeAtorRepository)
         {
             this.filmeRepository = filmeRepository;
+            this.atorRepository = atorRepository;
+            this.filmeAtorRepository = filmeAtorRepository;
         }
         
 
@@ -43,13 +47,26 @@ namespace InfnetMovieDataBase.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(Filme filme)
         {
+
+            //filme.Atores = new System.Collections.Generic.List<Ator>();
+            //filme.Atores.Add(new Ator() { Nome = "Fernanda", Sobrenome = "Montengro" });
+
             try
-            {
+            {              
                 if (ModelState.IsValid)
                 {
-                    filmeRepository.CriarFilme(filme);
+                    var filmeId = filmeRepository.CriarFilme(filme);
+                    if (filme.Atores != null)
+                    {
+                        for (int i = 0; i < filme.Atores.Count; i++)
+                        {
+                            var atorId = atorRepository.CriarAtor(filme.Atores[i]);
+                            filmeAtorRepository.CriarFilmeAtor(filmeId, atorId);
+                        }
+                    }
                     return RedirectToAction(nameof(Index));
                 }
+
                 return View(filme);
 
             }

@@ -22,11 +22,22 @@
                 <input asp-for="TituloOriginal" class="form-control" />
                 <span asp-validation-for="TituloOriginal" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Ano" class="control-label"></label>
-                <input asp-for="Ano" class="form-control" />
-                <span asp-validation-for="Ano" class="text-danger"></span>
-            </div>
+            @*@for (int i = 0; i < Model.Atores.Count; i++)
+            {
+                <tr>
+                    @Model.Atores.Count
+                    <td class="editor-field">
+                        @Html.EditorFor(model => model.Atores[i].Nome)
+                    </td>
+
+
+                    <td class="editor-field">
+                        @Html.EditorFor(model => model.Atores[i].Sobrenome)
+                        @Html.ValidationMessageFor(model => model.Atores[i].Sobrenome)
+                    </td>
+
+                </tr>
+            }*@
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
                 @Html.ActionLink("Back", "Index", "Filme", null, new { @class = "btn btn-secondary" })

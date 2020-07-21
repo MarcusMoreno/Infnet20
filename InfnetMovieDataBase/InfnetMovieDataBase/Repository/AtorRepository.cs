@@ -7,28 +7,29 @@ using Microsoft.Extensions.Configuration;
 
 namespace InfnetMovieDataBase.Repository
 {
-    public interface IPessoaRepository
-    {
-        IEnumerable<Pessoa> ListarPessoas();
-        void CriarPessoa(Pessoa pessoa);
-        void AtualizarPessoa(Pessoa pessoa);
-        Pessoa DetalharPessoa(int id);
-        void ExcluirPessoa(int id);
+    public interface IAtorRepository
+    { 
+        IEnumerable<Ator> ListarAtores();
+        string CriarAtor(Ator ator);
+        void AtualizarAtor(Ator ator);
+        Ator DetalharAtor(int id);
+        void ExcluirAtor(int id);
+        IEnumerable<Filme> ListarFilme(int id);
     }
 
-    public class PessoaRepository : IPessoaRepository
+    public class AtorRepository : IAtorRepository
     {
         private readonly string connectionString;
 
-        public PessoaRepository(IConfiguration configuration)
+        public AtorRepository(IConfiguration configuration)
         {
             this.connectionString = configuration["DataBase:connection"];
         }
         //Listar
-        public IEnumerable<Pessoa> ListarPessoas()
+        public IEnumerable<Ator> ListarAtores()
         {
         //1. Onde vamos armazenar o resultado da consulta?
-            var usuarios = new List<Pessoa>();
+            var usuarios = new List<Ator>();
 
             //2. Estabelecer uma conexão com o banco
             using var connection = new SqlConnection(connectionString);
@@ -36,7 +37,7 @@ namespace InfnetMovieDataBase.Repository
             //A conexão existe
 
             //O que queremos acessar no banco?
-            var cmdText = "SELECT * FROM Pessoa";
+            var cmdText = "SELECT * FROM Ator";
             //Vincular esse comando a uma conexão:
             var select = new SqlCommand(cmdText, connection);
 
@@ -51,12 +52,11 @@ namespace InfnetMovieDataBase.Repository
                     {
                         /*Enquanto for possível ler de reader, 
                         significa que temos um novo Pessoa armazenado no banco*/
-                        var usuario = new Pessoa();
+                        var usuario = new Ator();
                         usuario.Id = (int)reader["Id"];
                         usuario.Nome = reader["Nome"].ToString();
                         usuario.Sobrenome = reader["Sobrenome"].ToString();
-                        usuario.DataNascimento = (DateTime)reader["DataNascimento"];
-
+                    
                         usuarios.Add(usuario);
                     }
                 }
@@ -71,38 +71,43 @@ namespace InfnetMovieDataBase.Repository
             return usuarios;
         }
 
-        //Criar
-        public void CriarPessoa(Pessoa pessoa)
+        public string CriarAtor(Ator ator)
         {
-            using SqlConnection connection = new SqlConnection(connectionString);
-            string cmdText = "INSERT INTO Pessoa (Nome, Sobrenome, DataNascimento) Values(@Nome, @Sobrenome, @DataNascimento)";
-            SqlCommand cmd = new SqlCommand(cmdText, connection);
-            cmd.CommandType = CommandType.Text;
-            cmd.Parameters.AddWithValue("@Nome", pessoa.Nome);
-            cmd.Parameters.AddWithValue("@Sobrenome", pessoa.Sobrenome);
-            cmd.Parameters.AddWithValue("@DataNascimento", pessoa.DataNascimento);
+            using var connection = new SqlConnection(connectionString);
+
+            //Usando Stored Procedure:
+            var sp = "CriarAtor";
+            var insert = new SqlCommand(sp, connection);
+            insert.CommandType = CommandType.StoredProcedure;
+
+            insert.Parameters.AddWithValue("@Nome", ator.Nome);
+            insert.Parameters.AddWithValue("@Sobrenome", ator.Sobrenome);
+            SqlParameter outputIdParam = new SqlParameter("@IdAtor", SqlDbType.Int)
+            {
+                Direction = ParameterDirection.Output
+            };
+            insert.Parameters.Add(outputIdParam);
             try
             {
                 connection.Open();
-                cmd.ExecuteNonQuery();
+                insert.ExecuteNonQuery();
+                return insert.Parameters["@IdAtor"].Value.ToString();
             }
             catch (Exception e)
             {
                 throw e;
             }
-
         }
 
         //Atualizar
-        public void AtualizarPessoa(Pessoa pessoa)
+        public void AtualizarAtor(Ator ator)
         {
             using SqlConnection connection = new SqlConnection(connectionString);
-            string cmdText = "UPDATE Pessoa SET Nome=@Nome, Sobrenome=@Sobrenome, DataNascimento=@DataNascimento WHERE Id=@Id";
+            string cmdText = "UPDATE Ator SET Nome=@Nome, Sobrenome=@Sobrenome WHERE Id=@Id";
             SqlCommand cmd = new SqlCommand(cmdText, connection);
-            cmd.Parameters.AddWithValue("@Id", pessoa.Id);
-            cmd.Parameters.AddWithValue("@Nome", pessoa.Nome);
-            cmd.Parameters.AddWithValue("@Sobrenome", pessoa.Sobrenome);
-            cmd.Parameters.AddWithValue("@DataNascimento", pessoa.DataNascimento);
+            cmd.Parameters.AddWithValue("@Id", ator.Id);
+            cmd.Parameters.AddWithValue("@Nome", ator.Nome);
+            cmd.Parameters.AddWithValue("@Sobrenome", ator.Sobrenome);
             try
             {
                 connection.Open();
@@ -116,13 +121,13 @@ namespace InfnetMovieDataBase.Repository
         }
 
         //Detalhar
-        public Pessoa DetalharPessoa(int id)
+        public Ator DetalharAtor(int id)
         {
             using SqlConnection connection = new SqlConnection(connectionString);
-            string sql = "SELECT Id, Nome, Sobrenome, DataNascimento FROM Pessoa WHERE Id=@Id";
+            string sql = "SELECT Id, Nome, Sobrenome FROM Ator WHERE Id=@Id";
             SqlCommand cmd = new SqlCommand(sql, connection);
             cmd.Parameters.AddWithValue("@Id", id);
-            Pessoa pessoa = null;
+            Ator ator = null;
             try
             {
                 connection.Open();
@@ -132,11 +137,10 @@ namespace InfnetMovieDataBase.Repository
                     {
                         if (reader.Read())
                         {
-                            pessoa = new Pessoa();
-                            pessoa.Id = (int)reader["Id"];
-                            pessoa.Nome = reader["Nome"].ToString();
-                            pessoa.Sobrenome = reader["Sobrenome"].ToString();
-                            pessoa.DataNascimento = (DateTime)reader["DataNascimento"];
+                            ator = new Ator();
+                            ator.Id = (int)reader["Id"];
+                            ator.Nome = reader["Nome"].ToString();
+                            ator.Sobrenome = reader["Sobrenome"].ToString();
                         }
                     }
                 }
@@ -145,15 +149,15 @@ namespace InfnetMovieDataBase.Repository
             {
                 throw e;
             }
-            return pessoa;
+            return ator;
 
         }
 
         //Excluir
-        public void ExcluirPessoa(int id)
+        public void ExcluirAtor(int id)
         {
             using SqlConnection connection = new SqlConnection(connectionString);
-            string cmdText = "DELETE Pessoa WHERE Id=@Id";
+            string cmdText = "DELETE Ator WHERE Id=@Id";
             SqlCommand cmd = new SqlCommand(cmdText, connection);
             cmd.Parameters.AddWithValue("@Id", id);
             try
@@ -165,6 +169,44 @@ namespace InfnetMovieDataBase.Repository
             {
                 throw e;
             }
+        }
+
+        //Listar filmes do ator
+        public IEnumerable<Filme> ListarFilme(int id)
+        {
+            var elenco = new List<Filme>();
+
+            using var connection = new SqlConnection(connectionString);
+            var sp = "ListarFilmesPorAtor";
+            var sqlCommand = new SqlCommand(sp, connection);
+            sqlCommand.CommandType = CommandType.StoredProcedure;
+            sqlCommand.Parameters.AddWithValue("@AtorId", id);
+
+            try
+            {
+                connection.Open();
+                using var reader = sqlCommand.ExecuteReader(CommandBehavior.CloseConnection);
+                while (reader.Read())
+                {
+                    var filme = new Filme
+                    {
+                        Titulo = reader["Titulo"].ToString(),
+                        TituloOriginal = reader["TituloOriginal"].ToString()                   
+                    };
+
+                    elenco.Add(filme);
+                }
+            }
+            catch (Exception e)
+            {
+
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return elenco;
         }
     }
 

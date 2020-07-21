@@ -4,20 +4,24 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace InfnetMovieDataBase.Controllers
 {
-    public class PessoaController : Controller
+    public class AtorController : Controller
     {
-        private readonly IPessoaRepository pessoaRepository;
+        private readonly IAtorRepository atorRepository;
+        private readonly IFilmeRepository filmeRepository;
+        private readonly IFilmeAtorRepository filmeAtorRepository;
 
-        public PessoaController(IPessoaRepository pessoaRepository)
+        public AtorController(IAtorRepository pessoaRepository, IFilmeRepository filmeRepository, IFilmeAtorRepository filmeAtorRepository)
         {
-            this.pessoaRepository = pessoaRepository;
+            this.atorRepository = pessoaRepository;
+            this.filmeRepository = filmeRepository;
+            this.filmeAtorRepository = filmeAtorRepository;
         }
         
 
         // GET: Pessoa
         public ActionResult Index()
         {            
-            var pessoas = pessoaRepository.ListarPessoas();
+            var pessoas = atorRepository.ListarAtores();
 
             return View(pessoas);
         }
@@ -25,7 +29,7 @@ namespace InfnetMovieDataBase.Controllers
         // GET: Pessoa/Details/5
         public ActionResult Details(int id)
         {
-            var pessoa = pessoaRepository.DetalharPessoa(id);
+            var pessoa = atorRepository.DetalharAtor(id);
 
             if (pessoa == null)
             {
@@ -44,16 +48,23 @@ namespace InfnetMovieDataBase.Controllers
         // POST: Pessoa/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind] Pessoa pessoa)
+        public ActionResult Create(Ator ator)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    pessoaRepository.CriarPessoa(pessoa);
-                    return RedirectToAction("Index");
+                    var atorId = atorRepository.CriarAtor(ator);
+                    if (ator.Filmes != null)
+                    {
+                        for (int i = 0; i < ator.Filmes.Count; i++)
+                        {
+                            var filmeId = filmeRepository.CriarFilme(ator.Filmes[i]);
+                            filmeAtorRepository.CriarFilmeAtor(filmeId, atorId);
+                        }
+                    }
                 }
-                return View(pessoa);
+                return RedirectToAction(nameof(Index));
             }
             catch
             {
@@ -64,7 +75,7 @@ namespace InfnetMovieDataBase.Controllers
         // GET: Pessoa/Edit/5
         public ActionResult Edit(int id)
         {
-            var pessoa = pessoaRepository.DetalharPessoa(id);
+            var pessoa = atorRepository.DetalharAtor(id);
 
             if (pessoa == null)
             {
@@ -77,16 +88,15 @@ namespace InfnetMovieDataBase.Controllers
         // POST: Pessoa/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Pessoa pessoa)
+        public ActionResult Edit(Ator pessoa)
         {
             if (ModelState.IsValid)
             {
-                pessoaRepository.AtualizarPessoa(new Pessoa
+                atorRepository.AtualizarAtor(new Ator
                 {
                     Id = pessoa.Id,
                     Nome = pessoa.Nome,
-                    Sobrenome = pessoa.Sobrenome,
-                    DataNascimento = pessoa.DataNascimento
+                    Sobrenome = pessoa.Sobrenome
                 });
                 return RedirectToAction("Index");
             }
@@ -99,7 +109,7 @@ namespace InfnetMovieDataBase.Controllers
         // GET: Pessoa/Delete/5
         public ActionResult Delete(int id)
         {
-            var pessoa = pessoaRepository.DetalharPessoa(id);
+            var pessoa = atorRepository.DetalharAtor(id);
 
             if (pessoa == null)
             {
@@ -112,10 +122,16 @@ namespace InfnetMovieDataBase.Controllers
         // POST: Pessoa/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(Pessoa pessoa)
+        public ActionResult Delete(Ator pessoa)
         {
-            pessoaRepository.ExcluirPessoa(pessoa.Id);
+            atorRepository.ExcluirAtor(pessoa.Id);
             return RedirectToAction("Index");
+        }
+
+        public ActionResult Filme(int id)
+        {
+            var elenco = atorRepository.ListarFilme(id);
+            return View(elenco);
         }
     }
 }

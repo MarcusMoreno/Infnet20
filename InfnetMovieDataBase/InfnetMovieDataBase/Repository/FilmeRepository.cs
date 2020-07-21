@@ -10,8 +10,9 @@ namespace InfnetMovieDataBase.Repository
     public  interface IFilmeRepository
     {
         IEnumerable<Filme> ListarFilmes();
-        IEnumerable<Pessoa> ListarElenco(int id);
-        void CriarFilme(Filme filme);
+        IEnumerable<Ator> ListarElenco(int id);
+        string CriarFilme(Filme filme);
+
         void AtualizarFilme(Filme filme);
         Filme DetalharFilme(int id);
         void ExcluirFilme(int id);
@@ -50,7 +51,6 @@ namespace InfnetMovieDataBase.Repository
                     filme.Id = (int)reader["Id"]; 
                     filme.Titulo = reader["Titulo"].ToString();
                     filme.TituloOriginal = reader["TituloOriginal"].ToString();
-                    filme.Ano = (int)reader["Ano"];
                     filmes.Add(filme);
                 }
             }
@@ -67,9 +67,9 @@ namespace InfnetMovieDataBase.Repository
         }
 
         //Listar elenco do filme
-        public IEnumerable<Pessoa> ListarElenco(int id)
+        public IEnumerable<Ator> ListarElenco(int id)
         {
-            var elenco = new List<Pessoa>();
+            var elenco = new List<Ator>();
 
             using var connection = new SqlConnection(connectionString);
             var sp = "ListarAtoresPorFilme";
@@ -85,7 +85,7 @@ namespace InfnetMovieDataBase.Repository
                 using var reader = sqlCommand.ExecuteReader(CommandBehavior.CloseConnection);
                 while (reader.Read())
                 {
-                    var pessoa = new Pessoa
+                    var pessoa = new Ator
                     {
                         Nome = reader["Nome"].ToString(),
                         Sobrenome = reader["Sobrenome"].ToString()
@@ -106,41 +106,41 @@ namespace InfnetMovieDataBase.Repository
         }
 
         //Criar filmes
-        public void CriarFilme(Filme filme)
+        public string CriarFilme(Filme filme)
         {
             using var connection = new SqlConnection(connectionString);
-
-            //Usando puramente ADO.NET:
-            /*var cmdText = "INSERT INTO Filme (Titulo, TituloOriginal, Ano) VALUES (@Titulo, @TituloOriginal, @Ano)";
-            var insert = new SqlCommand(cmdText, connection);
-            insert.CommandType = CommandType.Text;*/
 
             //Usando Stored Procedure:
             var sp = "CriarFilme";
             var insert = new SqlCommand(sp, connection);
             insert.CommandType = CommandType.StoredProcedure;
             
-            //Configurar os parâmetros @Titulo, @TituloOriginal e @Ano:
             insert.Parameters.AddWithValue("@Titulo", filme.Titulo);
             insert.Parameters.AddWithValue("@TituloOriginal", filme.TituloOriginal);
-            insert.Parameters.AddWithValue("@Ano", filme.Ano);
+            SqlParameter outputIdParam = new SqlParameter("@IDFilme", SqlDbType.Int)
+            {
+                Direction = ParameterDirection.Output
+            };
+            insert.Parameters.Add(outputIdParam);
             try
             {
+
                 connection.Open();
                 insert.ExecuteNonQuery();
-            } catch (Exception e)
+                return insert.Parameters["@IDFilme"].Value.ToString();
+            }
+            catch (Exception e)
             {
-                throw e; 
+                throw e;
             }
         }
 
         public void AtualizarFilme(Filme filme)
         {
             using var connection = new SqlConnection(connectionString);
-            using var cmd = new SqlCommand("UPDATE Filme SET Titulo = @titulo, TituloOriginal = @tituloOriginal, Ano = @ano WHERE id = @id", connection);
+            using var cmd = new SqlCommand("UPDATE Filme SET Titulo = @titulo, TituloOriginal = @tituloOriginal WHERE id = @id", connection);
             cmd.Parameters.AddWithValue("@titulo", filme.Titulo);
             cmd.Parameters.AddWithValue("@tituloOriginal", filme.TituloOriginal);
-            cmd.Parameters.AddWithValue("@ano", filme.Ano);
             cmd.Parameters.AddWithValue("@id", filme.Id);
             
             try
@@ -171,7 +171,6 @@ namespace InfnetMovieDataBase.Repository
                 filme.Id = (int)reader["Id"];
                 filme.Titulo = reader["Titulo"].ToString();
                 filme.TituloOriginal = reader["TituloOriginal"].ToString();
-                filme.Ano = (int)reader["Ano"];
             }
             catch (Exception e)
             {

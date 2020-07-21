@@ -21,9 +21,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.TituloOriginal)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Ano)
-            </th>
+          
             <th></th>
         </tr>
     </thead>
@@ -38,9 +36,6 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.TituloOriginal)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Ano)
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", "Filme", new { id = item.Id }, new { @class = "btn btn-warning" }) 

@@ -1,19 +1,19 @@
-﻿@model IEnumerable<InfnetMovieDataBase.Domain.Ator>
+﻿@model IEnumerable<InfnetMovieDataBase.Domain.Filme>
 
 @{
-    ViewData["Title"] = "Elenco";
+    ViewData["Title"] = "Filme";
 }
 
-<h1>Elenco</h1>
+<h1>Filme</h1>
 
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Nome)
+                @Html.DisplayNameFor(model => model.Titulo)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Sobrenome)
+                @Html.DisplayNameFor(model => model.TituloOriginal)
             </th>
         </tr>
     </thead>
@@ -22,10 +22,10 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Nome)
+                    @Html.DisplayFor(modelItem => item.Titulo)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Sobrenome)
+                    @Html.DisplayFor(modelItem => item.TituloOriginal)
                 </td>
             </tr>
         }
