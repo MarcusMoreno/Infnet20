@@ -116,31 +116,38 @@ namespace InfnetMovieDataBase.Repository
 
             try
             {
+                Filme filme = null;
                 connection.Open();
                 using var reader = sqlCommand.ExecuteReader(CommandBehavior.CloseConnection);
                 while (reader.Read())
                 {
-                    var filme = new Filme();
-                    filme.Id = (int)reader["Id"];
-                    filme.Titulo = reader["Titulo"].ToString();
-                    filme.TituloOriginal = reader["TituloOriginal"].ToString();
-
-                    filme.Atores = new List<Ator>();
-                    filme.Atores.Add(new Ator()
+                    if (filme == null)
                     {
-                        Id = (int)reader["AtorId"],
-                        Nome = reader["Nome"].ToString(),
-                        Sobrenome = reader["Sobrenome"].ToString()
-                    });
-                    return filme;
+                        filme = new Filme();
+                        filme.Id = (int)reader["Id"];
+                        filme.Titulo = reader["Titulo"].ToString();
+                        filme.TituloOriginal = reader["TituloOriginal"].ToString();
+
+                        filme.Atores = new List<Ator>();
+                    }
+
+                    if (!string.IsNullOrEmpty(reader["AtorId"].ToString()))
+                    {
+                        filme.Atores.Add(new Ator()
+                        {
+                            Id = (int)reader["AtorId"],
+                            Nome = reader["Nome"].ToString(),
+                            Sobrenome = reader["Sobrenome"].ToString()
+                        });
+                    }
                 }
+
+                return filme;
             }
             catch (Exception e)
             {
                 throw e;
             }
-
-            return null;
         }
 
         public void ExcluirFilme(int id)

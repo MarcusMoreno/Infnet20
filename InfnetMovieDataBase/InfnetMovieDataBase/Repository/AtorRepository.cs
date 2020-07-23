@@ -98,13 +98,16 @@ namespace InfnetMovieDataBase.Repository
                         ator.Nome = reader["Nome"].ToString();
                         ator.Sobrenome = reader["Sobrenome"].ToString();
                         ator.Filmes = new List<Filme>();
-                    }               
-                    ator.Filmes.Add(new Filme()
+                    }
+                    if (!string.IsNullOrEmpty(reader["FilmeId"].ToString()))
                     {
-                        Id = (int)reader["FilmeId"],
-                        Titulo = reader["Titulo"].ToString(),
-                        TituloOriginal = reader["TituloOriginal"].ToString()
-                    });
+                        ator.Filmes.Add(new Filme()
+                        {
+                            Id = (int)reader["FilmeId"],
+                            Titulo = reader["Titulo"].ToString(),
+                            TituloOriginal = reader["TituloOriginal"].ToString()
+                        });
+                    }
                 }
                 return ator;
             }

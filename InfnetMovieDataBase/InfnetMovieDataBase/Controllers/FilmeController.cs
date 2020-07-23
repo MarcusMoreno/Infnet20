@@ -38,6 +38,7 @@ namespace InfnetMovieDataBase.Controllers
 
         public ActionResult Create()
         {
+            var generoList = generoRepository.ListarGenero();
             return View();
         }
 

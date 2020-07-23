@@ -117,12 +117,15 @@ namespace InfnetMovieDataBase.Repository
                         genero.Descricao = reader["Descricao"].ToString();
                         genero.Filmes = new List<Filme>();
                     }
-                    genero.Filmes.Add(new Filme()
+                    if (!string.IsNullOrEmpty(reader["FilmeId"].ToString()))
                     {
-                        Id = (int)reader["FilmeId"],
-                        Titulo = reader["Titulo"].ToString(),
-                        TituloOriginal = reader["TituloOriginal"].ToString()
-                    });
+                        genero.Filmes.Add(new Filme()
+                        {
+                            Id = (int)reader["FilmeId"],
+                            Titulo = reader["Titulo"].ToString(),
+                            TituloOriginal = reader["TituloOriginal"].ToString()
+                        });
+                    }
 
                 }
                 return genero;
