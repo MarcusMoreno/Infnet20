@@ -24,6 +24,7 @@ namespace InfnetMovieDataBase
             services.AddSingleton<IFilmeRepository, FilmeRepository>();
             services.AddSingleton<IGeneroRepository, GeneroRepository>();
             services.AddSingleton<IFilmeAtorRepository, FilmeAtorRepository>();
+            services.AddSingleton<IFilmeGeneroRepository, FilmeGeneroRepository>();
             #endregion
             services.AddControllersWithViews();
         }

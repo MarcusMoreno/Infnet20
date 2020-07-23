@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace InfnetMovieDataBase.Domain
 {
@@ -8,5 +9,9 @@ namespace InfnetMovieDataBase.Domain
 
         [Display(Name = "Descricao")]
         public string Descricao { get; set; }
+      
+        [Display(Name = "Filmes")]
+        public List<Filme> Filmes { get; set; }
+
     }
 }

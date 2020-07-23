@@ -8,13 +8,12 @@ using Microsoft.Extensions.Configuration;
 namespace InfnetMovieDataBase.Repository
 {
     public interface IAtorRepository
-    { 
+    {
         IEnumerable<Ator> ListarAtores();
         string CriarAtor(Ator ator);
         void AtualizarAtor(Ator ator);
         Ator DetalharAtor(int id);
         void ExcluirAtor(int id);
-        IEnumerable<Filme> ListarFilme(int id);
     }
 
     public class AtorRepository : IAtorRepository
@@ -25,51 +24,7 @@ namespace InfnetMovieDataBase.Repository
         {
             this.connectionString = configuration["DataBase:connection"];
         }
-        //Listar
-        public IEnumerable<Ator> ListarAtores()
-        {
-        //1. Onde vamos armazenar o resultado da consulta?
-            var usuarios = new List<Ator>();
-
-            //2. Estabelecer uma conexão com o banco
-            using var connection = new SqlConnection(connectionString);
-
-            //A conexão existe
-
-            //O que queremos acessar no banco?
-            var cmdText = "SELECT * FROM Ator";
-            //Vincular esse comando a uma conexão:
-            var select = new SqlCommand(cmdText, connection);
-
-
-            try
-            {
-                connection.Open();
-                using (var reader = select.ExecuteReader(CommandBehavior.CloseConnection))
-                {
-                    //A conexão está aberta; O comando SQL foi executado
-                    while (reader.Read())
-                    {
-                        /*Enquanto for possível ler de reader, 
-                        significa que temos um novo Pessoa armazenado no banco*/
-                        var usuario = new Ator();
-                        usuario.Id = (int)reader["Id"];
-                        usuario.Nome = reader["Nome"].ToString();
-                        usuario.Sobrenome = reader["Sobrenome"].ToString();
-                    
-                        usuarios.Add(usuario);
-                    }
-                }
-            }
-            finally
-            {
-                connection.Close();
-            }
-
-
-
-            return usuarios;
-        }
+        
 
         public string CriarAtor(Ator ator)
         {
@@ -123,34 +78,40 @@ namespace InfnetMovieDataBase.Repository
         //Detalhar
         public Ator DetalharAtor(int id)
         {
-            using SqlConnection connection = new SqlConnection(connectionString);
-            string sql = "SELECT Id, Nome, Sobrenome FROM Ator WHERE Id=@Id";
-            SqlCommand cmd = new SqlCommand(sql, connection);
-            cmd.Parameters.AddWithValue("@Id", id);
-            Ator ator = null;
+            using var connection = new SqlConnection(connectionString);
+            var sp = "GetAtor";
+            var sqlCommand = new SqlCommand(sp, connection);
+            sqlCommand.CommandType = CommandType.StoredProcedure;
+            sqlCommand.Parameters.AddWithValue("@Id", id);
+
             try
             {
+                Ator ator = null;
                 connection.Open();
-                using (var reader = cmd.ExecuteReader(CommandBehavior.CloseConnection))
+                using var reader = sqlCommand.ExecuteReader(CommandBehavior.CloseConnection);           
+                while (reader.Read())
                 {
-                    if (reader.HasRows)
+                    if (ator == null)
                     {
-                        if (reader.Read())
-                        {
-                            ator = new Ator();
-                            ator.Id = (int)reader["Id"];
-                            ator.Nome = reader["Nome"].ToString();
-                            ator.Sobrenome = reader["Sobrenome"].ToString();
-                        }
-                    }
+                        ator = new Ator();
+                        ator.Id = (int)reader["Id"];
+                        ator.Nome = reader["Nome"].ToString();
+                        ator.Sobrenome = reader["Sobrenome"].ToString();
+                        ator.Filmes = new List<Filme>();
+                    }               
+                    ator.Filmes.Add(new Filme()
+                    {
+                        Id = (int)reader["FilmeId"],
+                        Titulo = reader["Titulo"].ToString(),
+                        TituloOriginal = reader["TituloOriginal"].ToString()
+                    });
                 }
+                return ator;
             }
             catch (Exception e)
             {
                 throw e;
             }
-            return ator;
-
         }
 
         //Excluir
@@ -172,40 +133,36 @@ namespace InfnetMovieDataBase.Repository
         }
 
         //Listar filmes do ator
-        public IEnumerable<Filme> ListarFilme(int id)
+        public IEnumerable<Ator> ListarAtores()
         {
-            var elenco = new List<Filme>();
+            var elenco = new List<Ator>();
 
             using var connection = new SqlConnection(connectionString);
-            var sp = "ListarFilmesPorAtor";
+            var sp = "ListarAtor";
             var sqlCommand = new SqlCommand(sp, connection);
             sqlCommand.CommandType = CommandType.StoredProcedure;
-            sqlCommand.Parameters.AddWithValue("@AtorId", id);
-
+       
             try
             {
                 connection.Open();
                 using var reader = sqlCommand.ExecuteReader(CommandBehavior.CloseConnection);
                 while (reader.Read())
                 {
-                    var filme = new Filme
+                    var ator = new Ator
                     {
-                        Titulo = reader["Titulo"].ToString(),
-                        TituloOriginal = reader["TituloOriginal"].ToString()                   
+                        Id = (int)reader["Id"],
+                        Nome = reader["Nome"].ToString(),
+                        Sobrenome = reader["Sobrenome"].ToString()
                     };
 
-                    elenco.Add(filme);
+                    elenco.Add(ator);
                 }
             }
             catch (Exception e)
             {
 
             }
-            finally
-            {
-                connection.Close();
-            }
-
+      
             return elenco;
         }
     }

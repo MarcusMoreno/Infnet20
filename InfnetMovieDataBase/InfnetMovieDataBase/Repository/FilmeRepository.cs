@@ -10,10 +10,8 @@ namespace InfnetMovieDataBase.Repository
     public  interface IFilmeRepository
     {
         IEnumerable<Filme> ListarFilmes();
-        IEnumerable<Ator> ListarElenco(int id);
         string CriarFilme(Filme filme);
-
-        void AtualizarFilme(Filme filme);
+       void AtualizarFilme(Filme filme);
         Filme DetalharFilme(int id);
         void ExcluirFilme(int id);
     }
@@ -29,21 +27,18 @@ namespace InfnetMovieDataBase.Repository
     
         public IEnumerable<Filme> ListarFilmes()
         {
-            // Onde vamos armazenar o resultado da consulta?
             var filmes = new List<Filme>();
 
-            using var connection = new SqlConnection(connectionString); // Dá close e dispose
-            // Agora, a conexão existe.
-            // O que queremos acessar do banco?
-            var cmdText = "SELECT * FROM Filme";
-            // Vincular esse comando a uma conexão:
-            var select = new SqlCommand(cmdText, connection);
+            using var connection = new SqlConnection(connectionString);
+            var sp = "ListarFilme";
+            var sqlCommand = new SqlCommand(sp, connection);
+            sqlCommand.CommandType = CommandType.StoredProcedure;
+
             try
             {
-                //Abrir a conexão
+               
                 connection.Open();
-                using var reader = select.ExecuteReader(CommandBehavior.CloseConnection);
-                // A conexão está aberta; O comando SQL foi executado
+                using var reader = sqlCommand.ExecuteReader(CommandBehavior.CloseConnection);
                 while (reader.Read())
                 {
                     //Enquanto for possível ler de reader significa que ainda temos Filmes armazenados no banco
@@ -58,51 +53,8 @@ namespace InfnetMovieDataBase.Repository
             {
                 throw e;
             }
-            finally
-            {
-
-            }
-
+          
             return filmes;
-        }
-
-        //Listar elenco do filme
-        public IEnumerable<Ator> ListarElenco(int id)
-        {
-            var elenco = new List<Ator>();
-
-            using var connection = new SqlConnection(connectionString);
-            var sp = "ListarAtoresPorFilme";
-            //Vinculando o que desejamos executar (a stored procedure)
-            //à conexão na qual desejamos executá-la (connection)
-            var sqlCommand = new SqlCommand(sp, connection);
-            sqlCommand.CommandType = CommandType.StoredProcedure;
-            sqlCommand.Parameters.AddWithValue("@FilmeId", id);
-
-            try
-            {
-                connection.Open();
-                using var reader = sqlCommand.ExecuteReader(CommandBehavior.CloseConnection);
-                while (reader.Read())
-                {
-                    var pessoa = new Ator
-                    {
-                        Nome = reader["Nome"].ToString(),
-                        Sobrenome = reader["Sobrenome"].ToString()
-                    };
-
-                    elenco.Add(pessoa);
-                }
-            } catch (Exception e)
-            {
-
-            }
-            finally
-            {
-                connection.Close();
-            }
-
-            return elenco;
         }
 
         //Criar filmes
@@ -156,32 +108,39 @@ namespace InfnetMovieDataBase.Repository
 
         public Filme DetalharFilme(int id)
         {
-            var filme = new Filme();
-
-            using var connection = new SqlConnection(connectionString); 
-            using var cmd = new SqlCommand("SELECT * FROM Filme WHERE id = @id", connection);
-            cmd.Parameters.AddWithValue("@id", id);
+            using var connection = new SqlConnection(connectionString);
+            var sp = "GetFilme";
+            var sqlCommand = new SqlCommand(sp, connection);
+            sqlCommand.CommandType = CommandType.StoredProcedure;
+            sqlCommand.Parameters.AddWithValue("@Id", id);
 
             try
             {
                 connection.Open();
-                using var reader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
-                reader.Read();
+                using var reader = sqlCommand.ExecuteReader(CommandBehavior.CloseConnection);
+                while (reader.Read())
+                {
+                    var filme = new Filme();
+                    filme.Id = (int)reader["Id"];
+                    filme.Titulo = reader["Titulo"].ToString();
+                    filme.TituloOriginal = reader["TituloOriginal"].ToString();
 
-                filme.Id = (int)reader["Id"];
-                filme.Titulo = reader["Titulo"].ToString();
-                filme.TituloOriginal = reader["TituloOriginal"].ToString();
+                    filme.Atores = new List<Ator>();
+                    filme.Atores.Add(new Ator()
+                    {
+                        Id = (int)reader["AtorId"],
+                        Nome = reader["Nome"].ToString(),
+                        Sobrenome = reader["Sobrenome"].ToString()
+                    });
+                    return filme;
+                }
             }
             catch (Exception e)
             {
                 throw e;
             }
-            finally
-            {
 
-            }
-
-            return filme;
+            return null;
         }
 
         public void ExcluirFilme(int id)

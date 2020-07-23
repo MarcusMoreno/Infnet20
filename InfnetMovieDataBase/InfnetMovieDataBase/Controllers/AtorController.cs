@@ -16,17 +16,16 @@ namespace InfnetMovieDataBase.Controllers
             this.filmeRepository = filmeRepository;
             this.filmeAtorRepository = filmeAtorRepository;
         }
-        
 
-        // GET: Pessoa
+
+    
         public ActionResult Index()
-        {            
+        {
             var pessoas = atorRepository.ListarAtores();
 
             return View(pessoas);
         }
 
-        // GET: Pessoa/Details/5
         public ActionResult Details(int id)
         {
             var pessoa = atorRepository.DetalharAtor(id);
@@ -39,13 +38,11 @@ namespace InfnetMovieDataBase.Controllers
             return View(pessoa);
         }
 
-        // GET: Pessoa/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Pessoa/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(Ator ator)
@@ -56,11 +53,11 @@ namespace InfnetMovieDataBase.Controllers
                 {
                     var atorId = atorRepository.CriarAtor(ator);
                     if (ator.Filmes != null)
-                    {
+                    {                     
                         for (int i = 0; i < ator.Filmes.Count; i++)
                         {
-                            var filmeId = filmeRepository.CriarFilme(ator.Filmes[i]);
-                            filmeAtorRepository.CriarFilmeAtor(filmeId, atorId);
+                            //TODO valida ser filme existe
+                            filmeAtorRepository.CreateOrUpdateFilmeAtor(ator.Filmes[i].Id.ToString(), atorId);
                         }
                     }
                 }
@@ -72,7 +69,6 @@ namespace InfnetMovieDataBase.Controllers
             }
         }
 
-        // GET: Pessoa/Edit/5
         public ActionResult Edit(int id)
         {
             var pessoa = atorRepository.DetalharAtor(id);
@@ -85,28 +81,32 @@ namespace InfnetMovieDataBase.Controllers
             return View(pessoa);
         }
 
-        // POST: Pessoa/Edit/5
+    
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Ator pessoa)
+        public ActionResult Edit(Ator ator)
         {
             if (ModelState.IsValid)
             {
-                atorRepository.AtualizarAtor(new Ator
+                atorRepository.AtualizarAtor(ator);
+
+                if (ator.Filmes != null)
                 {
-                    Id = pessoa.Id,
-                    Nome = pessoa.Nome,
-                    Sobrenome = pessoa.Sobrenome
-                });
+                    for (int i = 0; i < ator.Filmes.Count; i++)
+                    { 
+                        //TODO valida ser filme existe
+                        filmeAtorRepository.CreateOrUpdateFilmeAtor(ator.Filmes[i].Id.ToString(), ator.Id.ToString());
+                    }
+                }
                 return RedirectToAction("Index");
             }
             else
             {
-                return View(pessoa);
+                return View(ator);
             }
         }
 
-        // GET: Pessoa/Delete/5
+       
         public ActionResult Delete(int id)
         {
             var pessoa = atorRepository.DetalharAtor(id);
@@ -119,7 +119,6 @@ namespace InfnetMovieDataBase.Controllers
             return View(pessoa);
         }
 
-        // POST: Pessoa/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(Ator pessoa)
@@ -128,10 +127,5 @@ namespace InfnetMovieDataBase.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult Filme(int id)
-        {
-            var elenco = atorRepository.ListarFilme(id);
-            return View(elenco);
-        }
     }
 }

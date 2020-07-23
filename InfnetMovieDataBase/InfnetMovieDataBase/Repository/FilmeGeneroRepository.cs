@@ -1,35 +1,39 @@
 ﻿using Microsoft.Extensions.Configuration;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace InfnetMovieDataBase.Repository
 {
-    public interface IFilmeAtorRepository
+    public interface IFilmeGeneroRepository
     {
-        void CreateOrUpdateFilmeAtor(string filmeId, string atorId);
+        void CreateOrUpdateFilmeGenero(string filmeId, string generoId);
     }
 
-    public class FilmeAtorRepository : IFilmeAtorRepository
+    public class FilmeGeneroRepository : IFilmeGeneroRepository
     {
         private readonly string connectionString;
 
-        public FilmeAtorRepository(IConfiguration configuration)
+        public FilmeGeneroRepository(IConfiguration configuration)
         {
             this.connectionString = configuration["DataBase:connection"];
         }
 
-
-        public void CreateOrUpdateFilmeAtor(string filmeId, string atorId)
+        //Criar filmes
+        public void CreateOrUpdateFilmeGenero(string filmeId, string generoId)
         {
             using var connection = new SqlConnection(connectionString);
 
-            var sp = "CreateOrUpdateFilmeAtor";
+            //Usando Stored Procedure:
+            var sp = "CreateOrUpdateFilmeGenero";
             var insert = new SqlCommand(sp, connection);
             insert.CommandType = CommandType.StoredProcedure;
 
             insert.Parameters.AddWithValue("@FilmeId", filmeId);
-            insert.Parameters.AddWithValue("@AtorId", atorId);
+            insert.Parameters.AddWithValue("@GeneroId", generoId);
             try
             {
                 connection.Open();
@@ -40,6 +44,5 @@ namespace InfnetMovieDataBase.Repository
                 throw e;
             }
         }
-
     }
 }

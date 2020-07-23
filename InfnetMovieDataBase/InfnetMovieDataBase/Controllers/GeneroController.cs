@@ -7,28 +7,27 @@ namespace InfnetMovieDataBase.Controllers
 {
     public class GeneroController : Controller
     {
-        private readonly IGeneroRepository repository;
+        private readonly IGeneroRepository generoRepository;
+        private readonly IFilmeRepository filmeRepository;
+        private readonly IFilmeGeneroRepository filmeGeneroRepository;
 
-        public GeneroController(IGeneroRepository repository)
+        public GeneroController(IGeneroRepository repository, IFilmeRepository filmeRepository, IFilmeGeneroRepository filmeGeneroRepository)
         {
-            this.repository = repository;
+            this.generoRepository = repository;
+            this.filmeRepository = filmeRepository;
+            this.filmeGeneroRepository = filmeGeneroRepository;
         }
 
         public ActionResult Index()
         {
-            var generos = repository.ListarGenero();
+            var generos = generoRepository.ListarGenero();
 
             return View(generos);
         }
-        public ActionResult Filme(int id)
-        {
-            var filme = repository.ListarFilme(id);
-            return View(filme);
-        }
-
+      
         public ActionResult Details(int id)
         {
-            var genero = repository.DetalharGenero(id);
+            var genero = generoRepository.DetalharGenero(id);
 
             return View(genero);
         }
@@ -46,21 +45,27 @@ namespace InfnetMovieDataBase.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    repository.CriarGenero(genero);
-                    return RedirectToAction(nameof(Index));
+                    var generoId = generoRepository.CriarGenero(genero);
+                    if (genero.Filmes != null)
+                    {
+                        for (int i = 0; i < genero.Filmes.Count; i++)
+                        {
+                           //TODO validar se filmeId existe
+                            filmeGeneroRepository.CreateOrUpdateFilmeGenero(genero.Filmes[i].Id.ToString(), generoId);
+                        }
+                    }
                 }
-                return View(genero);
-
+                return RedirectToAction(nameof(Index));
             }
             catch
             {
                 return View();
             }
         }
-
+    
         public ActionResult Edit(int id)
         {
-            var genero = repository.DetalharGenero(id);
+            var genero = generoRepository.DetalharGenero(id);
             return View(genero);
         }
 
@@ -72,7 +77,14 @@ namespace InfnetMovieDataBase.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    repository.AtualizarGenero(genero);
+                    generoRepository.AtualizarGenero(genero);
+
+                    for (int i = 0; i < genero.Filmes.Count; i++)
+                    {
+                        //TODO validar se filmeId existe
+                        filmeGeneroRepository.CreateOrUpdateFilmeGenero(genero.Filmes[i].Id.ToString(), genero.Id.ToString());
+                    }
+
                     return RedirectToAction(nameof(Index));
                 }
                 return View(genero);
