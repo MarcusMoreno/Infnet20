@@ -152,26 +152,22 @@ namespace InfnetMovieDataBase.Repository
 
         public void ExcluirFilme(int id)
         {
-            using var connection = new SqlConnection(connectionString); // Dá close e dispose
-            using var cmd = new SqlCommand("DELETE  FROM Filme WHERE id = @id", connection);
-            cmd.Parameters.AddWithValue("@id", id);
+            using var connection = new SqlConnection(connectionString);
+            var sp = "DeleteFilme";
+            var sqlCommand = new SqlCommand(sp, connection);
+            sqlCommand.CommandType = CommandType.StoredProcedure;
+            sqlCommand.Parameters.AddWithValue("@Id", id);
+
             try
             {
-                //Abrir a conexão
                 connection.Open();
-                using var reader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
-                // A conexão está aberta; O comando SQL foi executado
+                using var reader = sqlCommand.ExecuteReader(CommandBehavior.CloseConnection);
                 reader.Read();
             }
             catch (Exception e)
             {
                 throw e;
             }
-            finally
-            {
-
-            }
-
         }
     }
 }

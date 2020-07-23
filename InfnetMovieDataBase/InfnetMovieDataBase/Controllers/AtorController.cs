@@ -1,6 +1,11 @@
-﻿using InfnetMovieDataBase.Domain;
+﻿using InfnetMovieDataBase.Contratos.Request;
+using InfnetMovieDataBase.Contratos.Response;
+using InfnetMovieDataBase.Domain;
 using InfnetMovieDataBase.Repository;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace InfnetMovieDataBase.Controllers
 {
@@ -18,113 +23,81 @@ namespace InfnetMovieDataBase.Controllers
         }
 
 
-    
-        public ActionResult Index()
-        {
-            var pessoas = atorRepository.ListarAtores();
 
-            return View(pessoas);
+        [HttpGet]
+        [Route("list")]
+        public List<AtorResponse> GetAll()
+        {
+            var atores = atorRepository.ListarAtores();
+
+            return atores.Select(x => ResponseParser.ConvertAtor(x)).ToList();
         }
 
-        public ActionResult Details(int id)
+        [HttpGet]
+        [Route("{id}")]
+        public AtorResponse Details(int id)
         {
-            var pessoa = atorRepository.DetalharAtor(id);
-
-            if (pessoa == null)
-            {
-                return StatusCode(404);
-            }
-
-            return View(pessoa);
+            var ator = atorRepository.DetalharAtor(id);
+            return ResponseParser.ConvertAtor(ator);
         }
 
-        public ActionResult Create()
-        {
-            return View();
-        }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(Ator ator)
+        public ActionResult Create([FromBody]AtorRequest atorRequest)
         {
-            try
+            var ator = RequestParser.ConvertAtor(atorRequest);
+
+            var atorId = atorRepository.CriarAtor(ator);
+            if (ator.Filmes != null)
             {
-                if (ModelState.IsValid)
+                for (int i = 0; i < ator.Filmes.Count; i++)
                 {
-                    var atorId = atorRepository.CriarAtor(ator);
-                    if (ator.Filmes != null)
-                    {                     
-                        for (int i = 0; i < ator.Filmes.Count; i++)
-                        {
-                            //TODO valida ser filme existe
-                            filmeAtorRepository.CreateOrUpdateFilmeAtor(ator.Filmes[i].Id.ToString(), atorId);
-                        }
-                    }
+                    var filmeId = ator.Filmes[i].Id;
+                    var filme = filmeRepository.DetalharFilme(filmeId);
+                    if (filme == null) return BadRequest($"Invalid filme id {filmeId}");
+
+                    filmeAtorRepository.CreateOrUpdateFilmeAtor(filmeId.ToString(), atorId);
                 }
-                return RedirectToAction(nameof(Index));
             }
-            catch
-            {
-                return View();
-            }
+            return NoContent();
         }
 
-        public ActionResult Edit(int id)
+        [HttpPut]
+        [Route("{id}")]
+        public ActionResult Edit(string id, [FromBody]AtorRequest   atorRequest)
         {
-            var pessoa = atorRepository.DetalharAtor(id);
+            //validate
+            if (atorRepository.DetalharAtor(Convert.ToInt32(id)) == null) return NotFound($"Ator not found");
 
-            if (pessoa == null)
+            var filmes = filmeRepository.ListarFilmes().ToList();
+            for (int i = 0; i < atorRequest.Filmes.Count; i++)
             {
-                return StatusCode(404);
-            }
-
-            return View(pessoa);
-        }
-
-    
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(Ator ator)
-        {
-            if (ModelState.IsValid)
-            {
-                atorRepository.AtualizarAtor(ator);
-
-                if (ator.Filmes != null)
+                var filme = atorRequest.Filmes[i];
+                if (filmes.Exists(x => x.Id.ToString() == filme))
                 {
-                    for (int i = 0; i < ator.Filmes.Count; i++)
-                    { 
-                        //TODO valida ser filme existe
-                        filmeAtorRepository.CreateOrUpdateFilmeAtor(ator.Filmes[i].Id.ToString(), ator.Id.ToString());
-                    }
-                }
-                return RedirectToAction("Index");
+                    return BadRequest($"Invalid filme id {filme}");
+                } 
             }
-            else
+            
+            var ator = RequestParser.ConvertAtor(atorRequest, id);
+            atorRepository.AtualizarAtor(ator);
+
+            for (int i = 0; i < ator.Filmes.Count; i++)
             {
-                return View(ator);
+                var filmeId = ator.Filmes[i].Id;
+                filmeAtorRepository.CreateOrUpdateFilmeAtor(filmeId.ToString(),id);
             }
+            
+            return NoContent();
         }
 
-       
+
+        [HttpDelete]
+        [Route("{id}")]
         public ActionResult Delete(int id)
         {
-            var pessoa = atorRepository.DetalharAtor(id);
-
-            if (pessoa == null)
-            {
-                return StatusCode(404);
-            }
-
-            return View(pessoa);
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(Ator pessoa)
-        {
-            atorRepository.ExcluirAtor(pessoa.Id);
-            return RedirectToAction("Index");
+            atorRepository.ExcluirAtor(id);
+            return NoContent();
         }
 
     }
