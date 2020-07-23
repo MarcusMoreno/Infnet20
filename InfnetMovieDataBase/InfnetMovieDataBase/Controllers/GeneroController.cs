@@ -1,7 +1,10 @@
-﻿using InfnetMovieDataBase.Domain;
+﻿using InfnetMovieDataBase.Contratos.Request;
+using InfnetMovieDataBase.Contratos.Response;
 using InfnetMovieDataBase.Repository;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace InfnetMovieDataBase.Controllers
 {
@@ -18,104 +21,80 @@ namespace InfnetMovieDataBase.Controllers
             this.filmeGeneroRepository = filmeGeneroRepository;
         }
 
-        public ActionResult Index()
+        [HttpGet]
+        [Route("list")]
+        public List<GeneroResponse> Index()
         {
             var generos = generoRepository.ListarGenero();
 
-            return View(generos);
+            return generos.Select(x => ResponseParser.ConvertGenero(x)).ToList();
         }
-      
-        public ActionResult Details(int id)
+
+        [HttpGet]
+        [Route("{id}")]
+        public GeneroResponse Details(int id)
         {
             var genero = generoRepository.DetalharGenero(id);
 
-            return View(genero);
+            return ResponseParser.ConvertGenero(genero);
         }
-
-        public ActionResult Create()
-        {
-            return View();
-        }
-
+        
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(Genero genero)
+        public ActionResult Create([FromBody]GeneroRequest request)
         {
-            try
+            var genero = RequestParser.ConvertGenero(request);
+
+            var generoId = generoRepository.CriarGenero(genero);
+            if (genero.Filmes != null)
             {
-                if (ModelState.IsValid)
+                for (int i = 0; i < genero.Filmes.Count; i++)
                 {
-                    var generoId = generoRepository.CriarGenero(genero);
-                    if (genero.Filmes != null)
-                    {
-                        for (int i = 0; i < genero.Filmes.Count; i++)
-                        {
-                           //TODO validar se filmeId existe
-                            filmeGeneroRepository.CreateOrUpdateFilmeGenero(genero.Filmes[i].Id.ToString(), generoId);
-                        }
-                    }
+                    var filmeId = genero.Filmes[i].Id;
+                    var filme = filmeRepository.DetalharFilme(filmeId);
+                    if (filme == null) return BadRequest($"Invalid filme id {filmeId}");
+
+                    filmeGeneroRepository.CreateOrUpdateFilmeGenero(filmeId.ToString(), generoId);
                 }
-                return RedirectToAction(nameof(Index));
             }
-            catch
-            {
-                return View();
-            }
-        }
-    
-        public ActionResult Edit(int id)
-        {
-            var genero = generoRepository.DetalharGenero(id);
-            return View(genero);
+            return NoContent();
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(Genero genero)
+        [HttpPut]
+        [Route("{id}")]
+        public ActionResult Edit(string id, [FromBody]GeneroRequest request)
         {
-            try
+            //validate
+            if (generoRepository.DetalharGenero(Convert.ToInt32(id)) == null) return NotFound($"Genero not found");
+
+            var filmes = filmeRepository.ListarFilmes().ToList();
+            for (int i = 0; i < request.Filmes.Count; i++)
             {
-                if (ModelState.IsValid)
+                var filme = request.Filmes[i];
+                if (filmes.Exists(x => x.Id.ToString() == filme))
                 {
-                    generoRepository.AtualizarGenero(genero);
-
-                    for (int i = 0; i < genero.Filmes.Count; i++)
-                    {
-                        //TODO validar se filmeId existe
-                        filmeGeneroRepository.CreateOrUpdateFilmeGenero(genero.Filmes[i].Id.ToString(), genero.Id.ToString());
-                    }
-
-                    return RedirectToAction(nameof(Index));
+                    return BadRequest($"Invalid filme id {filme}");
                 }
-                return View(genero);
             }
-            catch
+
+            var genero = RequestParser.ConvertGenero(request, id);
+            generoRepository.AtualizarGenero(genero);
+
+            for (int i = 0; i < genero.Filmes.Count; i++)
             {
-                return View();
+                var filmeId = genero.Filmes[i].Id;
+                filmeGeneroRepository.CreateOrUpdateFilmeGenero(filmeId.ToString(), id);
             }
+
+            return NoContent();
         }
 
-        // GET: Filme/Delete/5
+
+        [HttpDelete]
+        [Route("{id}")]
         public ActionResult Delete(int id)
         {
-            return View();
-        }
-
-        // POST: Filme/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            generoRepository.ExcluirGenero(id);
+            return NoContent();
         }
     }
 }

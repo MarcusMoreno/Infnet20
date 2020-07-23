@@ -138,7 +138,22 @@ namespace InfnetMovieDataBase.Repository
 
         public void ExcluirGenero(int id)
         {
-            throw new NotImplementedException();
+            using var connection = new SqlConnection(connectionString);
+            var sp = "DeleteGenero";
+            var sqlCommand = new SqlCommand(sp, connection);
+            sqlCommand.CommandType = CommandType.StoredProcedure;
+            sqlCommand.Parameters.AddWithValue("@Id", id);
+
+            try
+            {
+                connection.Open();
+                using var reader = sqlCommand.ExecuteReader(CommandBehavior.CloseConnection);
+                reader.Read();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
         }
     }
 }

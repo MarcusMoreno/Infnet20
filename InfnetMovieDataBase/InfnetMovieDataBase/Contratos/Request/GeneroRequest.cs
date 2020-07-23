@@ -10,6 +10,6 @@ namespace InfnetMovieDataBase.Contratos.Request
         public string Descricao { get; set; }
 
         [DataMember(Name = "filmes")]
-        public List<FilmeRequest> Filmes { get; set; }
+        public List<string> Filmes { get; set; }
     }
 }

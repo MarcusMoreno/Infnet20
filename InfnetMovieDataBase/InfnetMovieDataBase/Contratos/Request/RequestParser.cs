@@ -13,7 +13,7 @@ namespace InfnetMovieDataBase.Contratos.Request
 
             filmeResponse.Titulo = filme.Titulo;
             filmeResponse.TituloOriginal = filme.TituloOriginal;
-            if(!string.IsNullOrEmpty(filme.Genero))
+            if (!string.IsNullOrEmpty(filme.Genero))
             {
                 filmeResponse.Genero = new Genero();
                 filmeResponse.Genero.Id = Convert.ToInt32(filme.Genero);
@@ -49,6 +49,27 @@ namespace InfnetMovieDataBase.Contratos.Request
             }
 
             return ator;
+        }
+
+        public static Genero ConvertGenero(GeneroRequest request, string generoId = null)
+        {
+            var genero = new Genero();
+            if (!string.IsNullOrEmpty(generoId)) genero.Id = Convert.ToInt32(generoId);
+            genero.Descricao = request.Descricao;
+
+            if (request.Filmes != null)
+            {
+                genero.Filmes = new List<Filme>();
+
+                foreach (var filme in genero.Filmes)
+                {
+                    genero.Filmes.Add(new Filme()
+                    {
+                        Id = Convert.ToInt32(filme)
+                    });
+                }
+            }
+            return genero;
         }
     }
 }

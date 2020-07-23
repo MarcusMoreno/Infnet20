@@ -21,9 +21,7 @@ namespace InfnetMovieDataBase.Controllers
             this.filmeRepository = filmeRepository;
             this.filmeAtorRepository = filmeAtorRepository;
         }
-
-
-
+               
         [HttpGet]
         [Route("list")]
         public List<AtorResponse> GetAll()

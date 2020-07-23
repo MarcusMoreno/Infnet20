@@ -53,5 +53,23 @@ namespace InfnetMovieDataBase.Contratos.Response
 
             return atorResponse;
         }
+
+        public static GeneroResponse ConvertGenero(Genero genero)
+        {
+            var generoResponse = new GeneroResponse();
+            generoResponse.Id = genero.Id.ToString();
+            generoResponse.Descricao = genero.Descricao;
+
+            if(genero.Filmes != null)
+            {
+                generoResponse.Filmes = new List<FilmeResponse>();
+                
+                foreach(var filme in genero.Filmes)
+                {
+                    generoResponse.Filmes.Add(new FilmeResponse() { Titulo = filme.Titulo, TituloOriginal = filme.TituloOriginal });
+                }
+            }
+            return generoResponse;
+        }
     }
 }

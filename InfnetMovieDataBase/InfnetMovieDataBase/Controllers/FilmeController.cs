@@ -46,9 +46,6 @@ namespace InfnetMovieDataBase.Controllers
         [HttpPost]
         public ActionResult Create([FromBody]FilmeRequest filmeRequest)
         {
-            //filme.Atores = new System.Collections.Generic.List<Ator>();
-            //filme.Atores.Add(new Ator() { Id = 3 });
-
             var filme = RequestParser.ConvertFilme(filmeRequest);
 
             var filmeId = filmeRepository.CriarFilme(filme);
@@ -100,6 +97,7 @@ namespace InfnetMovieDataBase.Controllers
             }
 
             var filme = RequestParser.ConvertFilme(filmeRequest, id);
+
 
             filmeRepository.AtualizarFilme(filme);
             for (int i = 0; i < filme.Atores.Count; i++)

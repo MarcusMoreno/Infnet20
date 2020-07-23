@@ -117,17 +117,19 @@ namespace InfnetMovieDataBase.Repository
             }
         }
 
-        //Excluir
         public void ExcluirAtor(int id)
         {
-            using SqlConnection connection = new SqlConnection(connectionString);
-            string cmdText = "DELETE Ator WHERE Id=@Id";
-            SqlCommand cmd = new SqlCommand(cmdText, connection);
-            cmd.Parameters.AddWithValue("@Id", id);
+            using var connection = new SqlConnection(connectionString);
+            var sp = "DeleteAtor";
+            var sqlCommand = new SqlCommand(sp, connection);
+            sqlCommand.CommandType = CommandType.StoredProcedure;
+            sqlCommand.Parameters.AddWithValue("@Id", id);
+
             try
             {
                 connection.Open();
-                cmd.ExecuteNonQuery();
+                using var reader = sqlCommand.ExecuteReader(CommandBehavior.CloseConnection);
+                reader.Read();
             }
             catch (Exception e)
             {
@@ -135,7 +137,6 @@ namespace InfnetMovieDataBase.Repository
             }
         }
 
-        //Listar filmes do ator
         public IEnumerable<Ator> ListarAtores()
         {
             var elenco = new List<Ator>();

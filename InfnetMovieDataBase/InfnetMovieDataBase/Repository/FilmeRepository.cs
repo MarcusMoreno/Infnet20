@@ -41,7 +41,7 @@ namespace InfnetMovieDataBase.Repository
                 using var reader = sqlCommand.ExecuteReader(CommandBehavior.CloseConnection);
                 while (reader.Read())
                 {
-                    //Enquanto for possível ler de reader significa que ainda temos Filmes armazenados no banco
+               
                     var filme = new Filme();
                     filme.Id = (int)reader["Id"]; 
                     filme.Titulo = reader["Titulo"].ToString();
@@ -57,7 +57,6 @@ namespace InfnetMovieDataBase.Repository
             return filmes;
         }
 
-        //Criar filmes
         public string CriarFilme(Filme filme)
         {
             using var connection = new SqlConnection(connectionString);
