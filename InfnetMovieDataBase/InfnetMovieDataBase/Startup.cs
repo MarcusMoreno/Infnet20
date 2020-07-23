@@ -20,9 +20,11 @@ namespace InfnetMovieDataBase
         public void ConfigureServices(IServiceCollection services)
         {
             #region repository
-            services.AddSingleton<IPessoaRepository, PessoaRepository>();
+            services.AddSingleton<IAtorRepository, AtorRepository>();
             services.AddSingleton<IFilmeRepository, FilmeRepository>();
             services.AddSingleton<IGeneroRepository, GeneroRepository>();
+            services.AddSingleton<IFilmeAtorRepository, FilmeAtorRepository>();
+            services.AddSingleton<IFilmeGeneroRepository, FilmeGeneroRepository>();
             #endregion
             services.AddControllersWithViews();
         }

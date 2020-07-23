@@ -7,10 +7,18 @@ namespace InfnetMovieDataBase.Controllers
     public class FilmeController : Controller
     {
         private readonly IFilmeRepository filmeRepository;
-   
-        public FilmeController(IFilmeRepository filmeRepository)
+        private readonly IAtorRepository atorRepository;
+        private readonly IFilmeAtorRepository filmeAtorRepository;
+        private readonly IGeneroRepository generoRepository;
+        private readonly IFilmeGeneroRepository filmeGeneroRepository;
+
+        public FilmeController(IFilmeRepository filmeRepository, IAtorRepository atorRepository, IFilmeAtorRepository filmeAtorRepository, IGeneroRepository generoRepository, IFilmeGeneroRepository filmeGeneroRepository)
         {
             this.filmeRepository = filmeRepository;
+            this.atorRepository = atorRepository;
+            this.filmeAtorRepository = filmeAtorRepository;
+            this.generoRepository = generoRepository;
+            this.filmeGeneroRepository = filmeGeneroRepository;
         }
         
 
@@ -19,12 +27,6 @@ namespace InfnetMovieDataBase.Controllers
             var filmes = filmeRepository.ListarFilmes();
 
             return View(filmes);
-        }
-
-        public ActionResult Elenco(int id)
-        {
-            var elenco = filmeRepository.ListarElenco(id);
-            return View(elenco);
         }
 
         public ActionResult Details(int id)
@@ -43,13 +45,30 @@ namespace InfnetMovieDataBase.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(Filme filme)
         {
+            filme.Atores = new System.Collections.Generic.List<Ator>();
+            filme.Atores.Add(new Ator() { Id = 3 });
+
             try
-            {
+            {              
                 if (ModelState.IsValid)
                 {
-                    filmeRepository.CriarFilme(filme);
+                    var filmeId = filmeRepository.CriarFilme(filme);
+                    if (filme.Atores != null)
+                    {
+                        for (int i = 0; i < filme.Atores.Count; i++)
+                        {
+                            //TODO validar se atorId existe
+                            filmeAtorRepository.CreateOrUpdateFilmeAtor(filmeId, filme.Atores[i].Id.ToString());
+                        }
+                    }
+                    if (filme.Genero != null)
+                    {
+                        //TODO validar se generoId existe
+                        filmeGeneroRepository.CreateOrUpdateFilmeGenero(filmeId, filme.Id.ToString()); ;
+                    }
                     return RedirectToAction(nameof(Index));
                 }
+
                 return View(filme);
 
             }
@@ -74,6 +93,16 @@ namespace InfnetMovieDataBase.Controllers
                 if (ModelState.IsValid)
                 {
                     filmeRepository.AtualizarFilme(filme);
+                    for (int i = 0; i < filme.Atores.Count; i++)
+                    {
+                        //TODO validar se atorId existe
+                        filmeAtorRepository.CreateOrUpdateFilmeAtor(filme.Id.ToString(), filme.Atores[i].Id.ToString());
+                    }
+                    if (filme.Genero != null)
+                    {
+                        //TODO validar se generoId existe
+                        filmeGeneroRepository.CreateOrUpdateFilmeGenero(filme.Id.ToString(), filme.Id.ToString());
+                    }
                     return RedirectToAction(nameof(Index));
                 }
                 return View(filme);

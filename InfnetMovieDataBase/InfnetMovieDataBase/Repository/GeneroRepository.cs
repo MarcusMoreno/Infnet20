@@ -10,8 +10,7 @@ namespace InfnetMovieDataBase.Repository
     public interface IGeneroRepository
     {
         IEnumerable<Genero> ListarGenero();
-        IEnumerable<Filme> ListarFilme(int id);
-       void CriarGenero(Genero genero);
+        string CriarGenero(Genero genero);
        void AtualizarGenero(Genero genero);
        Genero DetalharGenero(int id);
        void ExcluirGenero(int id);
@@ -26,56 +25,18 @@ namespace InfnetMovieDataBase.Repository
             this.connectionString = configuration["DataBase:connection"];
         }
 
-        public IEnumerable<Filme> ListarFilme(int id)
-        {
-            var filmes = new List<Filme>();
-
-            using var connection = new SqlConnection(connectionString);
-            var sp = "ListarFilmesPorGenero";
-            var sqlCommand = new SqlCommand(sp, connection);
-            sqlCommand.CommandType = CommandType.StoredProcedure;
-            sqlCommand.Parameters.AddWithValue("@GeneroId", id);
-
-            try
-            {
-                connection.Open();
-                using var reader = sqlCommand.ExecuteReader(CommandBehavior.CloseConnection);
-                while (reader.Read())
-                {
-                    var filme = new Filme
-                    {
-                        Titulo = reader["Titulo"].ToString(),
-                        TituloOriginal = reader["TituloOriginal"].ToString(),
-                        Ano = Convert.ToInt32( reader["Ano"])                       
-                    };
-
-                    filmes.Add(filme);
-                }
-            }
-            catch (Exception e)
-            {
-
-            }
-            finally
-            {
-                connection.Close();
-            }
-
-            return filmes;
-        }
-
         public IEnumerable<Genero> ListarGenero()
         {
             var generos = new List<Genero>();
 
-            using var connection = new SqlConnection(connectionString); 
-            var cmdText = "SELECT * FROM Genero";
-            var select = new SqlCommand(cmdText, connection);
+            using var connection = new SqlConnection(connectionString);
+            var sp = "ListarGenero";
+            var sqlCommand = new SqlCommand(sp, connection);
+            sqlCommand.CommandType = CommandType.StoredProcedure;
             try
             {
                 connection.Open();
-                using var reader = select.ExecuteReader(CommandBehavior.CloseConnection);
-     
+                using var reader = sqlCommand.ExecuteReader(CommandBehavior.CloseConnection);
                 while (reader.Read())
                 {
                     var genero = new Genero();
@@ -88,15 +49,10 @@ namespace InfnetMovieDataBase.Repository
             {
 
             }
-            finally
-            {
-
-            }
-
             return generos;
         }
 
-        public void CriarGenero(Genero genero)
+        public string CriarGenero(Genero genero)
         {
             using var connection = new SqlConnection(connectionString);
 
@@ -105,10 +61,16 @@ namespace InfnetMovieDataBase.Repository
             insert.CommandType = CommandType.StoredProcedure;
 
             insert.Parameters.AddWithValue("@Descricao", genero.Descricao);
+            SqlParameter outputIdParam = new SqlParameter("@IdGenero", SqlDbType.Int)
+            {
+                Direction = ParameterDirection.Output
+            };
+            insert.Parameters.Add(outputIdParam);
             try
             {
                 connection.Open();
                 insert.ExecuteNonQuery();
+                return insert.Parameters["@IdGenero"].Value.ToString();
             }
             catch (Exception e)
             {
@@ -136,33 +98,39 @@ namespace InfnetMovieDataBase.Repository
 
         public Genero DetalharGenero(int id)
         {
-            using SqlConnection connection = new SqlConnection(connectionString);
-            string sql = "SELECT * FROM Genero WHERE Id=@Id";
-            SqlCommand cmd = new SqlCommand(sql, connection);
-            cmd.Parameters.AddWithValue("@Id", id);
-            Genero genero = null;
+            using var connection = new SqlConnection(connectionString);
+            var sp = "GetGenero";
+            var sqlCommand = new SqlCommand(sp, connection);
+            sqlCommand.CommandType = CommandType.StoredProcedure;
+            sqlCommand.Parameters.AddWithValue("@Id", id);
             try
             {
+                Genero genero = null;
                 connection.Open();
-                using (var reader = cmd.ExecuteReader(CommandBehavior.CloseConnection))
+                using var reader = sqlCommand.ExecuteReader(CommandBehavior.CloseConnection);
+                while (reader.Read())
                 {
-                    if (reader.HasRows)
+                    if (genero == null)
                     {
-                        if (reader.Read())
-                        {
-                            genero = new Genero();
-                            genero.Id = (int)reader["Id"];
-                            genero.Descricao = reader["Descricao"].ToString();
-                        }
+                        genero = new Genero();
+                        genero.Id = (int)reader["Id"];
+                        genero.Descricao = reader["Descricao"].ToString();
+                        genero.Filmes = new List<Filme>();
                     }
+                    genero.Filmes.Add(new Filme()
+                    {
+                        Id = (int)reader["FilmeId"],
+                        Titulo = reader["Titulo"].ToString(),
+                        TituloOriginal = reader["TituloOriginal"].ToString()
+                    });
+
                 }
+                return genero;
             }
             catch (Exception e)
             {
                 throw e;
             }
-            return genero;
-
         }
 
         public void ExcluirGenero(int id)

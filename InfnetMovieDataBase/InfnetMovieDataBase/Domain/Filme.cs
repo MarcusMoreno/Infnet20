@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace InfnetMovieDataBase.Domain
 {
@@ -12,8 +13,11 @@ namespace InfnetMovieDataBase.Domain
         [Display(Name = "Título Original")]
         public string TituloOriginal { get; set; }
 
-        [Display(Name = "Ano de Lançamento")]
-        public int Ano { get; set; }
+        [Display(Name = "Genero")]
+        public Genero Genero { get; set; }
+
+        [Display(Name = "Atores")]
+        public List<Ator> Atores { get; set; }
 
     }
 }

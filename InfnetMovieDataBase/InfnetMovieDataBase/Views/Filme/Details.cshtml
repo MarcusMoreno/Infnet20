@@ -10,34 +10,57 @@
     <h4>Filme</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Id)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Id)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Titulo)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Titulo)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.TituloOriginal)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.TituloOriginal)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Ano)
+    </dl>
+    <hr />
+    <h4>Genero</h4>
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Genero.Descricao)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Ano)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Genero.Descricao)
         </dd>
     </dl>
+    <hr />
+    <h4>Atores</h4>
+    <dl class="row">
+        @foreach (var ator in Model.Atores)
+        {
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(x => ator.Nome)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(x => ator.Nome)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(x => ator.Sobrenome)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(x => ator.Sobrenome)
+            </dd>
+        }
+    </dl>
+
 </div>
 <div>
     @Html.ActionLink("Edit", "Edit", "Filme", new { id = Model.Id }, new { @class = "btn btn-warning" } ) 
-    @Html.ActionLink("Squad", "Elenco","Filme", new { id = Model.Id }, new { @class = "btn btn-info" }) 
     @Html.ActionLink("Back", "Index", "Filme", null, new { @class = "btn btn-secondary" })
 </div>
