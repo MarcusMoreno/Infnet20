@@ -1,0 +1,410 @@
+{
+	"info": {
+		"_postman_id": "e5920c52-b5af-4c98-a253-c9b8fc95c492",
+		"name": "Infnet",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "InfnetMovieDataBase",
+			"item": [
+				{
+					"name": "Filme",
+					"item": [
+						{
+							"name": "Create filme",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"titulo\": \"Teste\",\r\n    \"tituloOriginal\": \"n\",\r\n    \"genero\": \"1\",\r\n    \"atores\": [\r\n        \"3\",\r\n        \"4\"\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:44353/filme",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "44353",
+									"path": [
+										"filme"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get filme",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:44353/filme/4",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "44353",
+									"path": [
+										"filme",
+										"4"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "List filmes",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:44353/filme/list",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "44353",
+									"path": [
+										"filme",
+										"list"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Edit filme",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"titulo\": \"Teste novo\",\r\n    \"tituloOriginal\": \"n\",\r\n    \"genero\": \"1\",\r\n    \"atores\": [\r\n        \"3\",\r\n        \"4\"\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:44353/filme/2016",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "44353",
+									"path": [
+										"filme",
+										"2016"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Filme",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:44353/filme/2013",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "44353",
+									"path": [
+										"filme",
+										"2013"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Ator",
+					"item": [
+						{
+							"name": "Create Ator",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"titulo\": \"Teste\",\r\n    \"tituloOriginal\": \"n\",\r\n    \"genero\": \"1\",\r\n    \"atores\": [\r\n        \"3\",\r\n        \"4\"\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:44353/Ator",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "44353",
+									"path": [
+										"Ator"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Ator",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:44353/Ator/4",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "44353",
+									"path": [
+										"Ator",
+										"4"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "List Atores",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:44353/Ator/list",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "44353",
+									"path": [
+										"Ator",
+										"list"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Edit Atores",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"titulo\": \"Teste novo\",\r\n    \"tituloOriginal\": \"n\",\r\n    \"genero\": \"1\",\r\n    \"atores\": [\r\n        \"3\",\r\n        \"4\"\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:44353/Ator/2016",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "44353",
+									"path": [
+										"Ator",
+										"2016"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Ator",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:44353/Ator/2013",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "44353",
+									"path": [
+										"Ator",
+										"2013"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Genero",
+					"item": [
+						{
+							"name": "Create Genero",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"titulo\": \"Teste\",\r\n    \"tituloOriginal\": \"n\",\r\n    \"genero\": \"1\",\r\n    \"atores\": [\r\n        \"3\",\r\n        \"4\"\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:44353/Genero",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "44353",
+									"path": [
+										"Genero"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Genero",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:44353/Genero/4",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "44353",
+									"path": [
+										"Genero",
+										"4"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "List Generos",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:44353/Genero/list",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "44353",
+									"path": [
+										"Genero",
+										"list"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Edit Genero",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"titulo\": \"Teste novo\",\r\n    \"tituloOriginal\": \"n\",\r\n    \"genero\": \"1\",\r\n    \"atores\": [\r\n        \"3\",\r\n        \"4\"\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:44353/Genero/2016",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "44353",
+									"path": [
+										"Genero",
+										"2016"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Genero",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:44353/Genero/2013",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "44353",
+									"path": [
+										"Genero",
+										"2013"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "cadfbd40-c9e9-4abe-8ec0-43322dd3ccdc",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "fd8ce035-4f57-4448-a30b-e8b39faa339d",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
