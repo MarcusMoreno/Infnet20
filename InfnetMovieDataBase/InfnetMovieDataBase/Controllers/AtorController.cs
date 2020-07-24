@@ -1,6 +1,5 @@
 ﻿using InfnetMovieDataBase.Contratos.Request;
 using InfnetMovieDataBase.Contratos.Response;
-using InfnetMovieDataBase.Domain;
 using InfnetMovieDataBase.Repository;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -9,6 +8,7 @@ using System.Linq;
 
 namespace InfnetMovieDataBase.Controllers
 {
+    [Route("ator")]
     public class AtorController : Controller
     {
         private readonly IAtorRepository atorRepository;

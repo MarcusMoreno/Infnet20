@@ -1,11 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+using System;
 
 namespace InfnetMovieDataBase
 {
@@ -16,11 +12,12 @@ namespace InfnetMovieDataBase
             CreateHostBuilder(args).Build().Run();
         }
 
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                });
+        public static IWebHostBuilder CreateHostBuilder(string[] args) =>
+              WebHost.CreateDefaultBuilder(args)
+             .UseStartup<Startup>()
+             .ConfigureKestrel(o =>
+             { 
+                 o.Limits.KeepAliveTimeout = TimeSpan.FromSeconds(7); 
+             });
     }
 }

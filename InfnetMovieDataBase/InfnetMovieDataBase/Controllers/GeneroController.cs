@@ -8,6 +8,7 @@ using System.Linq;
 
 namespace InfnetMovieDataBase.Controllers
 {
+    [Route("genero")]
     public class GeneroController : Controller
     {
         private readonly IGeneroRepository generoRepository;
