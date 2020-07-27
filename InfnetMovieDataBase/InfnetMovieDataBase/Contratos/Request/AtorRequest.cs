@@ -6,8 +6,7 @@ namespace InfnetMovieDataBase.Contratos.Request
     [DataContract]
     public class AtorRequest
     {
-
-
+        
         [DataMember(Name = "nome")]
         public string Nome { get; set; }
 

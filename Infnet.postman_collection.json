@@ -18,7 +18,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"titulo\": \"Teste\",\r\n    \"tituloOriginal\": \"n\",\r\n    \"genero\": \"1\",\r\n    \"atores\": [\r\n        \"3\",\r\n        \"4\"\r\n    ]\r\n}",
+									"raw": "{\r\n    \"titulo\": \"Teste titulo\",\r\n    \"tituloOriginal\": \"teste titulo original\",\r\n    \"genero\": \"1\",\r\n    \"atores\": [\r\n        \"3\",\r\n        \"4\"\r\n    ]\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -86,7 +86,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"titulo\": \"Teste novo\",\r\n    \"tituloOriginal\": \"n\",\r\n    \"genero\": \"1\",\r\n    \"atores\": [\r\n        \"3\",\r\n        \"4\"\r\n    ]\r\n}",
+									"raw": "{\r\n    \"titulo\": \"Teste edit titulo\",\r\n    \"tituloOriginal\": \"teste edit titulo original\",\r\n    \"genero\": \"1\",\r\n    \"atores\": [\r\n        \"3\",\r\n        \"4\"\r\n    ]\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -142,7 +142,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"titulo\": \"Teste\",\r\n    \"tituloOriginal\": \"n\",\r\n    \"genero\": \"1\",\r\n    \"atores\": [\r\n        \"3\",\r\n        \"4\"\r\n    ]\r\n}",
+									"raw": "{\r\n    \"nome\": \"Teste nome\",\r\n    \"sobrenome\": \"teste sobrenome\",\r\n    \"filmes\": [\r\n        \"3\",\r\n        \"5\"\r\n    ]\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -169,7 +169,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "https://localhost:44353/Ator/4",
+									"raw": "https://localhost:44353/Ator/5",
 									"protocol": "https",
 									"host": [
 										"localhost"
@@ -177,7 +177,7 @@
 									"port": "44353",
 									"path": [
 										"Ator",
-										"4"
+										"5"
 									]
 								}
 							},
@@ -210,7 +210,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"titulo\": \"Teste novo\",\r\n    \"tituloOriginal\": \"n\",\r\n    \"genero\": \"1\",\r\n    \"atores\": [\r\n        \"3\",\r\n        \"4\"\r\n    ]\r\n}",
+									"raw": "{\r\n    \"nome\": \"Teste edit nome\",\r\n    \"sobrenome\": \"teste edit sobrenome\",\r\n    \"filmes\": [\r\n        \"3\",\r\n        \"5\"\r\n    ]\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -238,7 +238,7 @@
 								"method": "DELETE",
 								"header": [],
 								"url": {
-									"raw": "https://localhost:44353/Ator/2013",
+									"raw": "https://localhost:44353/Ator/5",
 									"protocol": "https",
 									"host": [
 										"localhost"
@@ -246,7 +246,7 @@
 									"port": "44353",
 									"path": [
 										"Ator",
-										"2013"
+										"5"
 									]
 								}
 							},
@@ -266,7 +266,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"titulo\": \"Teste\",\r\n    \"tituloOriginal\": \"n\",\r\n    \"genero\": \"1\",\r\n    \"atores\": [\r\n        \"3\",\r\n        \"4\"\r\n    ]\r\n}",
+									"raw": "{\r\n    \"descricao\": \"Teste descricao\",\r\n    \"filmes\": [\r\n        \"6\",\r\n        \"2015\"\r\n    ]\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -342,7 +342,7 @@
 									}
 								},
 								"url": {
-									"raw": "https://localhost:44353/Genero/2016",
+									"raw": "https://localhost:44353/Genero/6",
 									"protocol": "https",
 									"host": [
 										"localhost"
@@ -350,7 +350,7 @@
 									"port": "44353",
 									"path": [
 										"Genero",
-										"2016"
+										"6"
 									]
 								}
 							},
@@ -362,7 +362,7 @@
 								"method": "DELETE",
 								"header": [],
 								"url": {
-									"raw": "https://localhost:44353/Genero/2013",
+									"raw": "https://localhost:44353/Genero/6",
 									"protocol": "https",
 									"host": [
 										"localhost"
@@ -370,7 +370,7 @@
 									"port": "44353",
 									"path": [
 										"Genero",
-										"2013"
+										"6"
 									]
 								}
 							},
